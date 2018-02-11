@@ -238,7 +238,12 @@ class ContactManager{
     }
     
     
-    
+    /**
+     Get CNContact From Full name
+     
+     - parameter contact: A value that contact user 
+     - parameter completionHandler: Returns Either CNContact or Error.
+     */
     public func contactIsExist(contact: CNContact, completionHandler: @escaping (_ result: ContactFetchResult) -> ()) {
         
         let contactStore: CNContactStore = CNContactStore()
