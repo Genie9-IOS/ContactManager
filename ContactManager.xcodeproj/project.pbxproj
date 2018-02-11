@@ -12,6 +12,7 @@
 		40CF1CC82030204C00FE0CCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40CF1CC62030204C00FE0CCA /* Main.storyboard */; };
 		40CF1CCA2030204C00FE0CCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40CF1CC92030204C00FE0CCA /* Assets.xcassets */; };
 		40CF1CCD2030204C00FE0CCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40CF1CCB2030204C00FE0CCA /* LaunchScreen.storyboard */; };
+		40CF1CD6203020AE00FE0CCA /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF1CD5203020AE00FE0CCA /* ContactManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		40CF1CC92030204C00FE0CCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40CF1CCC2030204C00FE0CCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40CF1CCE2030204C00FE0CCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40CF1CD5203020AE00FE0CCA /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +40,7 @@
 		40CF1CB62030204C00FE0CCA = {
 			isa = PBXGroup;
 			children = (
-				40CF1CC12030204C00FE0CCA /* ContactManager */,
+				40CF1CC12030204C00FE0CCA /* Contact */,
 				40CF1CC02030204C00FE0CCA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,15 +53,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		40CF1CC12030204C00FE0CCA /* ContactManager */ = {
+		40CF1CC12030204C00FE0CCA /* Contact */ = {
 			isa = PBXGroup;
 			children = (
+				40CF1CD42030208200FE0CCA /* ContactManager */,
 				40CF1CC22030204C00FE0CCA /* AppDelegate.swift */,
 				40CF1CC42030204C00FE0CCA /* ViewController.swift */,
 				40CF1CC62030204C00FE0CCA /* Main.storyboard */,
 				40CF1CC92030204C00FE0CCA /* Assets.xcassets */,
 				40CF1CCB2030204C00FE0CCA /* LaunchScreen.storyboard */,
 				40CF1CCE2030204C00FE0CCA /* Info.plist */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		40CF1CD42030208200FE0CCA /* ContactManager */ = {
+			isa = PBXGroup;
+			children = (
+				40CF1CD5203020AE00FE0CCA /* ContactManager.swift */,
 			);
 			path = ContactManager;
 			sourceTree = "<group>";
@@ -137,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40CF1CC52030204C00FE0CCA /* ViewController.swift in Sources */,
+				40CF1CD6203020AE00FE0CCA /* ContactManager.swift in Sources */,
 				40CF1CC32030204C00FE0CCA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,7 +287,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ContactManager/Info.plist;
+				INFOPLIST_FILE = Contact/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zoolz.ContactManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,7 +301,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ContactManager/Info.plist;
+				INFOPLIST_FILE = Contact/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zoolz.ContactManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
