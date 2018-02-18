@@ -104,8 +104,8 @@ class ContactManager {
      */
     func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
-        let contactStore: CNContactStore = CNContactStore()
-        var contacts: [CNContact] = [CNContact]()
+        let contactStore = CNContactStore()
+        var contacts = [CNContact]()
         
         let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
         do {
@@ -129,9 +129,9 @@ class ContactManager {
      */
     func getContactFromID(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
-        let contactStore: CNContactStore = CNContactStore()
-        var contacts: [CNContact] = [CNContact]()
-        let predicate: NSPredicate = CNContact.predicateForContacts(withIdentifiers: identifiers)
+        let contactStore = CNContactStore()
+        var contacts = [CNContact]()
+        let predicate = CNContact.predicateForContacts(withIdentifiers: identifiers)
         do {
             contacts = try contactStore.unifiedContacts(matching: predicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
             completionHandler(ContactsFetchResult.success(response: contacts))
@@ -149,9 +149,9 @@ class ContactManager {
      */
     func getcContactByFullName(_ contact: CNContact, completionHandler: @escaping (_ result: ContactFetchResult) -> ()) {
         
-        let contactStore: CNContactStore = CNContactStore()
-        var contacts: [CNContact] = [CNContact]()
-        let predicate: NSPredicate = CNContact.predicateForContacts(matchingName: contact.givenName + " " + contact.familyName)
+        let contactStore = CNContactStore()
+        var contacts = [CNContact]()
+        let predicate = CNContact.predicateForContacts(matchingName: contact.givenName + " " + contact.familyName)
         do {
             contacts = try contactStore.unifiedContacts(matching: predicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
             completionHandler(ContactFetchResult.success(response: contacts.first))
@@ -170,8 +170,8 @@ class ContactManager {
     ///   - completionHandler: Returns Either Bool or Error.
     private func transactionContacts(_ contacts: [CNContact] , transaction:TransactionContact, completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
         
-        let store: CNContactStore = CNContactStore()
-        let request: CNSaveRequest = CNSaveRequest()
+        let store = CNContactStore()
+        let request = CNSaveRequest()
         
         func executeRequest(){
             do {
@@ -288,7 +288,7 @@ class ContactManager {
      */
     func contactsToVCardConverter(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactsToVCardResult) -> ()) {
         
-        var vcardFromContacts: Data = Data()
+        var vcardFromContacts = Data()
         do {
             try vcardFromContacts = CNContactVCardSerialization.data(with: contacts)
             completionHandler(ContactsToVCardResult.success(response: vcardFromContacts))
@@ -310,7 +310,7 @@ class ContactManager {
      */
     func vCardToContactConverter(_ data: Data, completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
-        var contacts: [CNContact] = [CNContact]()
+        var contacts = [CNContact]()
         do {
             try contacts = CNContactVCardSerialization.contacts(with: data) as [CNContact]
             completionHandler(ContactsFetchResult.success(response: contacts))
@@ -351,30 +351,88 @@ class ContactManager {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 extension ContactManager{
     
     //MARK:- Enums
     
     private enum RelationType:String {
-        case other, assistant, brother, child, domesticPartner, father
-        , friend, manager, mother, parent, partner, referredBy, relative
-        , sister, spouse
+        case other = ""
+        case assistant = "_$!<Assistant>!$_"
+        case brother = "_$!<Brother>!$_"
+        case child = "_$!<Child>!$_"
+        case domesticPartner = "_$!<Parent>!$_"
+        case father = "_$!<Father>!$_"
+        case friend = "_$!<Friend>!$_"
+        case manager = "_$!<Manager>!$_"
+        case mother = "_$!<Mother>!$_"
+        case parent = "_$!<Parent>!$_ "
+        case partner = "_$!<Partner>!$_"
+        case referredBy = "Referred By"
+        case relative = "Relative"
+        case sister = "_$!<Sister>!$_"
+        case spouse = "_$!<Spouse>!$_"
+
+        static  func getValue(_ hashValue:Int)->RelationType{
+            switch hashValue {
+            case 0:
+                return .other
+            case 1:
+                return .assistant
+            case 2:
+                return .brother
+            case 3:
+                return .child
+            case 4:
+                return .domesticPartner
+            case 5:
+                return .father
+            case 6:
+                return .friend
+            case 7:
+                return .manager
+            case 8:
+                return .mother
+            case 9:
+                return .parent
+            case 10:
+                return .partner
+            case 11:
+                return .referredBy
+            case 12:
+                return .relative
+            case 13:
+                return .sister
+            case 14:
+                return .sister
+            default:
+                return .spouse
+            }
+        }
+       
         
     }
     
     private enum ContactEventType:String{
-        case anniversary, other, birthday
+        
+        case anniversary = "_$!<Anniversary>!$_"
+        case other = "_$!<Other>!$_"
+        case empty = ""
+        case birthday = "_$!<Birthday>!$_"
+
+        static  func getValue(_ hashValue:Int)->ContactEventType{
+            switch hashValue {
+                
+            case 1:
+                return .anniversary
+            case 2:
+                return .other
+            case 3:
+                return .birthday
+            default:
+                return .empty
+                
+            }
+        }
     }
     
     private enum CursorItem:String {
@@ -396,8 +454,6 @@ extension ContactManager{
         
     }
     
-    
-    
     private func matching(_ originalText:String, pattern: String)->[NSTextCheckingResult]{
         
         var re: NSRegularExpression!
@@ -415,26 +471,26 @@ extension ContactManager{
         let matchCursorPattern = "X-ANDROID-CUSTOM[;:].*vnd\\.android\\.cursor\\.item\\/(.*?);(.*)"
         var result = originalText
         let matches = matching(originalText, pattern: matchCursorPattern)
-        var itemRelationCount  = 0
-        var itemContactEventCount  = 0
+        var itemCount  = 0
         for match in matches.reversed()
         {
             let range = match.range(at: 0)
             let cursorItem = (originalText as NSString).substring(with: match.range(at: 1))
             let cursorItemValue = (originalText as NSString).substring(with: match.range(at: 2))
             //  let fullMatch = (originalText as NSString).substring(with: match.range(at: 0))
-            
             switch cursorItem {
+            
             case CursorItem.nickname.rawValue :
                 result  = (result as NSString).replacingCharacters(in: range, with: "NICKNAME:\(cursorItemValue.split(separator: ";").first ?? "")")
                 break
             case CursorItem.relation.rawValue :
-                result  = (result as NSString).replacingCharacters(in: range, with: "\(getCursorItemValue(cursorItemValue,index:itemRelationCount, cursorItemType: .relation))")
-                itemRelationCount += 1
+            //    RelationType.getValue(0).rawValue
+                result  = (result as NSString).replacingCharacters(in: range, with: "\(getCursorItemValue(cursorItemValue,index:itemCount, cursorItemType: .relation))")
+                itemCount += 1
                 break
             case CursorItem.contact_event.rawValue :
-                result  = (result as NSString).replacingCharacters(in: range, with: "\(getCursorItemValue(cursorItemValue,index:itemRelationCount, cursorItemType: .contact_event))")
-                itemContactEventCount += 1
+                result  = (result as NSString).replacingCharacters(in: range, with: "\(getCursorItemValue(cursorItemValue,index:itemCount, cursorItemType: .contact_event))")
+                itemCount += 1
                 break
             default:
                 break
@@ -502,11 +558,19 @@ extension ContactManager{
         
         if cursorItemType == CursorItem.relation {
             
-            return "item\(index).X-ABRELATEDNAMES:\(result.first ?? "")\nitem\(index).X-ABLabel:\(result.last ?? "")"
+            var abLabel = result.last
+            if let relationIndex = Int(abLabel ?? "")  {
+                abLabel = RelationType.getValue(relationIndex).rawValue
+            }
+            return "item\(index).X-ABRELATEDNAMES:\(result.first ?? "")\nitem\(index).X-ABLabel:\(abLabel ?? "")"
             
         }else{
             
-            return "item\(index).X-ABDATE:\(result.first ?? "")\nitem\(index).X-ABLabel:\(result.last ?? "")"
+            var abLabel = result.last
+            if let relationIndex = Int(abLabel ?? "")  {
+                abLabel = ContactEventType.getValue(relationIndex).rawValue
+            }
+            return "item\(index).X-ABDATE:\(result.first ?? "")\nitem\(index).X-ABLabel:\(abLabel ?? "")"
             
         }
     }
