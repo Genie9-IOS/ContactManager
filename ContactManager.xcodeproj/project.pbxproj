@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400D22E620396A7B004C9B12 /* cn.contacts in Resources */ = {isa = PBXBuildFile; fileRef = 400D22E520396A7B004C9B12 /* cn.contacts */; };
 		40CF1CC32030204C00FE0CCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF1CC22030204C00FE0CCA /* AppDelegate.swift */; };
 		40CF1CC52030204C00FE0CCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF1CC42030204C00FE0CCA /* ViewController.swift */; };
 		40CF1CC82030204C00FE0CCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40CF1CC62030204C00FE0CCA /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		400D22E520396A7B004C9B12 /* cn.contacts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cn.contacts; sourceTree = "<group>"; };
 		40CF1CBF2030204C00FE0CCA /* ContactManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40CF1CC22030204C00FE0CCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40CF1CC42030204C00FE0CCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 		40CF1CD42030208200FE0CCA /* ContactManager */ = {
 			isa = PBXGroup;
 			children = (
+				400D22E520396A7B004C9B12 /* cn.contacts */,
 				40CF1CD5203020AE00FE0CCA /* ContactManager.swift */,
 			);
 			path = ContactManager;
@@ -135,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40CF1CCD2030204C00FE0CCA /* LaunchScreen.storyboard in Resources */,
+				400D22E620396A7B004C9B12 /* cn.contacts in Resources */,
 				40CF1CCA2030204C00FE0CCA /* Assets.xcassets in Resources */,
 				40CF1CC82030204C00FE0CCA /* Main.storyboard in Resources */,
 			);
@@ -287,7 +291,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JLTTFTEZ6T;
 				INFOPLIST_FILE = Contact/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zoolz.ContactManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -301,7 +307,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JLTTFTEZ6T;
 				INFOPLIST_FILE = Contact/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zoolz.ContactManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
