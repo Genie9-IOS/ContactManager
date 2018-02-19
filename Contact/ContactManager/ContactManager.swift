@@ -8,7 +8,7 @@
 
 import Foundation
 import Contacts
-
+import UIKit
 /**
  Represents the generic output result when working with contacts, such as fetching or adding (from vcard).
  
@@ -17,7 +17,7 @@ import Contacts
  - success: Returns Array of Contacts
  - error: Returns error
  */
-enum ContactsFetchResult {
+ enum ContactsFetchResult {
     case success(response: [CNContact])
     case error(error: Error)
 }
@@ -30,7 +30,7 @@ enum ContactsFetchResult {
  - success: Returns signal  Contact
  - error: Returns error
  */
-enum ContactFetchResult {
+ enum ContactFetchResult {
     case success(response: CNContact?)
     case error(error: Error)
 }
@@ -43,7 +43,7 @@ enum ContactFetchResult {
  - Success: Returns Bool
  - Error: Returns error
  */
-enum ContactOperationResult {
+ enum ContactOperationResult {
     case success(response: Bool)
     case error(error: Error)
 }
@@ -55,7 +55,7 @@ enum ContactOperationResult {
  - Success: Returns Data object
  - Error: Returns error
  */
-enum ContactsToVCardResult {
+  enum ContactsToVCardResult {
     case success(response: Data)
     case error(error: Error)
 }
@@ -68,18 +68,173 @@ enum ContactsToVCardResult {
  - update: update contacts
  - delete: delete contacts
  */
-enum TransactionContact {
+private enum TransactionContact {
     case add, update, delete
 }
 
 /**
+ Enum relation types from android
+ - Author: Ahmad Almasri
+ 
+ - other: custom label relation = 0
+ - assistant:  assistant relation in android = 1
+ - brother: brother relation in android = 2
+ - child:  child relation in android = 3
+ - domesticPartner:  domesticPartner relation in android = 4 Note: 4 and 10 same relation in ios
+ - father:  father relation in android = 5
+ - friend:  friend relation in android = 6
+ - manager:  manager relation in android = 7
+ - mother:  mother relation in android = 8
+ - parent:  parent relation in android = 9
+ - partner:  partner relation in android = 10
+ - referredBy:  referredBy relation in android = 11  Note: not available ios used custom label
+ - relative:  relative relation in android = 12  Note: not available ios used custom label
+ - sister:  sister relation in android = 13
+ - spouse:  spouse relation in android = 14
+ */
+private enum RelationType:String {
+    case other = ""
+    case assistant = "_$!<Assistant>!$_"
+    case brother = "_$!<Brother>!$_"
+    case child = "_$!<Child>!$_"
+    case domesticPartner = "_$!<Parent>!$_"
+    case father = "_$!<Father>!$_"
+    case friend = "_$!<Friend>!$_"
+    case manager = "_$!<Manager>!$_"
+    case mother = "_$!<Mother>!$_"
+    case parent = "_$!<Parent>!$_ "
+    case partner = "_$!<Partner>!$_"
+    case referredBy = "Referred By"
+    case relative = "Relative"
+    case sister = "_$!<Sister>!$_"
+    case spouse = "_$!<Spouse>!$_"
+    
+    static  func getValue(_ hashValue:Int)->RelationType{
+        switch hashValue {
+        case 0:
+            return .other
+        case 1:
+            return .assistant
+        case 2:
+            return .brother
+        case 3:
+            return .child
+        case 4:
+            return .domesticPartner
+        case 5:
+            return .father
+        case 6:
+            return .friend
+        case 7:
+            return .manager
+        case 8:
+            return .mother
+        case 9:
+            return .parent
+        case 10:
+            return .partner
+        case 11:
+            return .referredBy
+        case 12:
+            return .relative
+        case 13:
+            return .sister
+        case 14:
+            return .sister
+        default:
+            return .spouse
+        }
+    }
+    
+    
+}
+
+/**
+ Enum Contact Event types from android
+ - Author: Ahmad Almasri
+ 
+ - anniversary:  anniversary Contact Event in android = 1
+ - other: other Contact Event in android = 2
+ - empty: custom label Contact Event = 0
+ - birthday: other Contact Event in android = 3
+ */
+private enum ContactEventType:String{
+    
+    case anniversary = "_$!<Anniversary>!$_"
+    case other = "_$!<Other>!$_"
+    case empty = ""
+    case birthday = "_$!<Birthday>!$_"
+    
+    static  func getValue(_ hashValue:Int)->ContactEventType{
+        switch hashValue {
+            
+        case 1:
+            return .anniversary
+        case 2:
+            return .other
+        case 3:
+            return .birthday
+        default:
+            return .empty
+            
+        }
+    }
+}
+/**
+ check regx group 1 type
+ - Author: Ahmad Almasri
+ 
+ - nickname: nickname cursor item type
+ - relation: relation cursor item type
+ - contact_event: contact_event cursor item type
+ */
+private enum CursorItem:String {
+    case nickname
+    case relation
+    case contact_event
+}
+/**
+ InfoType matching regx pattern type
+ - Author: Ahmad Almasri
+ 
+ - tel:  is tel using tel pattern
+ - email: is email using email pattern
+ - image: is image using image pattern
+ */
+private enum InfoType:String {
+    case tel, email, image
+}
+/**
+ Regex pattern
+ 
+ - matchCursorPattern: match Cursor pattern
+ - telPattern: match tel pattern
+ - emailPattern: match email pattern
+ - imagePattern: match image pattern
+ */
+private enum RegexVCard:String{
+    case matchCursorPattern = "X-ANDROID-CUSTOM[;:].*vnd\\.android\\.cursor\\.item\\/(.*?);(.*)"
+    case telPattern = "TEL;.*CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*):"
+    case emailPattern = "EMAIL;.*\\CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*)\\:"
+    case imagePattern = "PHOTO;ENCODING=.*JPEG:([\\s\\S]*?)(\\n\\n|END:VCARD|\\n\\r)"
+}
+
+ /**
+ custom Error code
+
+ - accessDenied: Don't have permission
+ */
+private enum ErrorCode:Int {
+    case accessDenied = 2000
+}
+/**
  This manager class is responsibile for any needed functionality to work with contacts, such as the CRUD transaction for all contacts as one chunk or as a single contact. Also, it handles the mapping of custom fields reveived from other platforms -such as Android so far-.
  
-  - Author: Ahmad Almasri
+ - Author: Ahmad Almasri
  
  - Warning: By default, the accessing of the init of this class is denied, However, make sure to access this function by it *shared* property.
  */
- class ContactManager {
+private class ContactManager {
     // TODO: name the dispatch queues labels.
     
     
@@ -89,30 +244,7 @@ enum TransactionContact {
     static let shared = ContactManager()
     
     //MARK:- Inits
-    private init() {
-        requestAccess { granted in
-            
-        }
-    }
-    
-    //MARK:- Permission
-    /**
-     Requests access to the user's contacts
-     - Author: Ahmad Almasri
-     
-     - Parameter requestGranted: Result as Bool
-     
-     - Note: any contacts functionality assumes that this method has been called and got granted as true, otherwise it would not be functional (roughtly speaking, all methods would return "Access Denied" error).
-     */
-    var accessGranted = false
-    
-    
-    func requestAccess(_ requestGranted: @escaping (Bool) -> ()) {
-        
-        CNContactStore().requestAccess(for: .contacts) { granted, _ in
-            requestGranted(granted)
-        }
-    }
+    private init() {}
     
     //MARK:- Fetching
     /**
@@ -380,158 +512,10 @@ enum TransactionContact {
 
 extension ContactManager {
     
-    //MARK:- Enums
-    /**
-     Enum relation types from android
-     - Author: Ahmad Almasri
-
-     - other: custom label relation = 0
-     - assistant:  assistant relation in android = 1
-     - brother: brother relation in android = 2
-     - child:  child relation in android = 3
-     - domesticPartner:  domesticPartner relation in android = 4 Note: 4 and 10 same relation in ios
-     - father:  father relation in android = 5
-     - friend:  friend relation in android = 6
-     - manager:  manager relation in android = 7
-     - mother:  mother relation in android = 8
-     - parent:  parent relation in android = 9
-     - partner:  partner relation in android = 10
-     - referredBy:  referredBy relation in android = 11  Note: not available ios used custom label
-     - relative:  relative relation in android = 12  Note: not available ios used custom label
-     - sister:  sister relation in android = 13
-     - spouse:  spouse relation in android = 14
-     */
-    private enum RelationType:String {
-        case other = ""
-        case assistant = "_$!<Assistant>!$_"
-        case brother = "_$!<Brother>!$_"
-        case child = "_$!<Child>!$_"
-        case domesticPartner = "_$!<Parent>!$_"
-        case father = "_$!<Father>!$_"
-        case friend = "_$!<Friend>!$_"
-        case manager = "_$!<Manager>!$_"
-        case mother = "_$!<Mother>!$_"
-        case parent = "_$!<Parent>!$_ "
-        case partner = "_$!<Partner>!$_"
-        case referredBy = "Referred By"
-        case relative = "Relative"
-        case sister = "_$!<Sister>!$_"
-        case spouse = "_$!<Spouse>!$_"
-        
-        static  func getValue(_ hashValue:Int)->RelationType{
-            switch hashValue {
-            case 0:
-                return .other
-            case 1:
-                return .assistant
-            case 2:
-                return .brother
-            case 3:
-                return .child
-            case 4:
-                return .domesticPartner
-            case 5:
-                return .father
-            case 6:
-                return .friend
-            case 7:
-                return .manager
-            case 8:
-                return .mother
-            case 9:
-                return .parent
-            case 10:
-                return .partner
-            case 11:
-                return .referredBy
-            case 12:
-                return .relative
-            case 13:
-                return .sister
-            case 14:
-                return .sister
-            default:
-                return .spouse
-            }
-        }
-        
-        
-    }
-    
-    /**
-     Enum Contact Event types from android
-     - Author: Ahmad Almasri
-
-     - anniversary:  anniversary Contact Event in android = 1
-     - other: other Contact Event in android = 2
-     - empty: custom label Contact Event = 0
-     - birthday: other Contact Event in android = 3
-     */
-    private enum ContactEventType:String{
-        
-        case anniversary = "_$!<Anniversary>!$_"
-        case other = "_$!<Other>!$_"
-        case empty = ""
-        case birthday = "_$!<Birthday>!$_"
-        
-        static  func getValue(_ hashValue:Int)->ContactEventType{
-            switch hashValue {
-                
-            case 1:
-                return .anniversary
-            case 2:
-                return .other
-            case 3:
-                return .birthday
-            default:
-                return .empty
-                
-            }
-        }
-    }
-    /**
-     check regx group 1 type
-     - Author: Ahmad Almasri
-
-     - nickname: nickname cursor item type
-     - relation: relation cursor item type
-     - contact_event: contact_event cursor item type
-     */
-    private enum CursorItem:String {
-        case nickname
-        case relation
-        case contact_event
-    }
-    /**
-     InfoType matching regx pattern type
-     - Author: Ahmad Almasri
-
-     - tel:  is tel using tel pattern
-     - email: is email using email pattern
-     - image: is image using image pattern
-     */
-    private enum InfoType:String {
-        case tel, email, image
-    }
-    /**
-     Regex pattern
-     
-     - matchCursorPattern: match Cursor pattern
-     - telPattern: match tel pattern
-     - emailPattern: match email pattern
-     - imagePattern: match image pattern
-     */
-    private enum RegexVCard:String{
-        case matchCursorPattern = "X-ANDROID-CUSTOM[;:].*vnd\\.android\\.cursor\\.item\\/(.*?);(.*)"
-        case telPattern = "TEL;.*CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*):"
-        case emailPattern = "EMAIL;.*\\CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*)\\:"
-        case imagePattern = "PHOTO;ENCODING=.*JPEG:([\\s\\S]*?)(\\n\\n|END:VCARD|\\n\\r)"
-    }
-    
     //MARK:- Parse VCard
     /**
-    parseAndroidVCard convert vCard android format to ios format
-       - Author: Ahmad Almasri
+     parseAndroidVCard convert vCard android format to ios format
+     - Author: Ahmad Almasri
      
      - Parameter vCard: value of android vCard
      - Returns: vCard formatted  ios
@@ -551,12 +535,12 @@ extension ContactManager {
     /**
      Checks is supplied string matches the pattern.
      - Author: Ahmad Almasri
-
+     
      - Parameters:
-       - originalText: String to be matched to the pattern
-       - pattern: A pattern to be used with Regex
+     - originalText: String to be matched to the pattern
+     - pattern: A pattern to be used with Regex
      - Returns: array of matches include all groups and range
-    */
+     */
     private func matching(_ originalText:String, pattern: String)->[NSTextCheckingResult]{
         
         var re: NSRegularExpression!
@@ -573,7 +557,7 @@ extension ContactManager {
     /**
      matchCursorItem get matching and replace for ( nickname, relation , contact_event)
      - Author: Ahmad Almasri
-
+     
      - Parameter originalText: String to be matched to the pattern
      - Returns: vCard after format ( nickname, relation , contact_event)
      */
@@ -592,7 +576,7 @@ extension ContactManager {
             switch cursorItem {
                 
             case CursorItem.nickname.rawValue :
-        
+                
                 result  = (result as NSString).replacingCharacters(in: range, with:
                     "NICKNAME:\(cursorItemValue.split(separator: ";").first ?? "")")
                 
@@ -626,10 +610,10 @@ extension ContactManager {
     /**
      matchInfo get matching and replace for ( tel, email , images)
      - Author: Ahmad Almasri
-
+     
      - Parameters:
-       - originalText: String to be matched to the pattern
-       - infoType: type of matching (tel , email or image)
+     - originalText: String to be matched to the pattern
+     - infoType: type of matching (tel , email or image)
      - Returns: vCard after format ( tel, email , images
      */
     private func matchInfo(_ originalText:String,infoType:InfoType)->String{
@@ -683,11 +667,11 @@ extension ContactManager {
     /**
      getCursorItemValue convert format item (relation, contact event) from android to ios
      - Author: Ahmad Almasri
-
+     
      - Parameters:
-       - cursorItem: cursorItem value full fatching
-       - index: item count 1,2,3...N
-       - cursorItemType: fromat type (relation or contact event)
+     - cursorItem: cursorItem value full fatching
+     - index: item count 1,2,3...N
+     - cursorItemType: fromat type (relation or contact event)
      - Returns: CursorItemValue ios format
      */
     private func getCursorItemValue(_ cursorItem: String, index:Int , cursorItemType:CursorItem) -> String {
@@ -722,7 +706,7 @@ extension ContactManager {
     /**
      Decode a quoted printable encoded string
      - Author: Ahmad Almasri
-
+     
      - parameter string: String to decode
      - returns: Decoded string
      */
@@ -742,23 +726,134 @@ extension ContactManager {
 }
 
 
-/// /// ///
-
-
 struct ContactsManagerFacade {
+    
     static func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
-        if PermissionHandler.getContactsPermission() {
-            ContactManager.shared.fetchContacts(completionHandler: completionHandler)
-        } else {
-            let error: NSError = NSError(domain: "Access Denied", code: 200)
-            completionHandler(.error(error: error))
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.fetchContacts(completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
         }
     }
+    
+    static func getContactsByIdentifiers(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.getContactsByIdentifiers(identifiers, completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+        }
+    }
+    
+    static func getcContactByFullName(_ contact: CNContact, completionHandler: @escaping (_ result: ContactFetchResult) -> ()) {
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.getcContactByFullName(contact, completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+        }
+    }
+    
+    static func  addContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.addContact(contacts, completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+            
+        }
+    }
+    
+    static func updateContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.updateContact(contacts, completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+            
+        }
+    }
+    
+    static func deleteContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.deleteContact(contacts, completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+        }
+    }
+    
+    static func contactsToVCardConverter(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactsToVCardResult) -> ()){
+        
+        ContactManager.shared.contactsToVCardConverter(contacts, completionHandler: completionHandler)
+        
+    }
+    
+    static func vCardToContactConverter(_ data: Data, completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
+        
+        ContactManager.shared.vCardToContactConverter(data, completionHandler: completionHandler)
+    }
+    
+    static func  parseAndroidVCard(_ vCard:String)->String{
+        
+        return ContactManager.shared.parseAndroidVCard(vCard)
+        
+    }
+    
+   
 }
 
 
 struct PermissionHandler {
-    static func getContactsPermission() -> Bool {
-        return false
+    
+    //MARK:- Permission
+    /**
+     Requests access to the user's contacts
+     - Author: Ahmad Almasri
+     
+     - Parameter requestGranted: Result as Bool
+     
+     - Note: any contacts functionality assumes that this method has been called and got granted as true, otherwise it would not be functional (roughtly speaking, all methods would return "Access Denied" error).
+     */
+    static func requestAccess(_ requestGranted: @escaping (Bool) -> ()) {
+        
+        CNContactStore().requestAccess(for: .contacts) { granted, _ in
+            requestGranted(granted)
+        }
+    }
+}
+
+extension UIViewController {
+    func showDialog(forError error: Error) {
+        let error = error as NSError
+        
+        switch error.code {
+        case ErrorCode.accessDenied.rawValue:
+            print("don't have contact perrmission")
+            break
+        default:
+            print("Unknown error code \(error.code) ")
+
+            break
+        }
     }
 }

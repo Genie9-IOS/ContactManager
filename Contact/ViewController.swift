@@ -25,23 +25,6 @@ class ViewController: UIViewController {
             }
         }
         
-        ContactManager.shared.requestAccess { (isAA) in
-            if isAA {
-                
-                ContactManager.shared.fetchContacts(completionHandler: { (result) in
-                    
-                })
-            }else{
-                
-            }
-        }
     }
 }
 
-
-extension UIViewController {
-    func showDialog(forError: Error) {
-        // checked what is the error code
-        print("showing a dialog for contact perrmission")
-    }
-}
