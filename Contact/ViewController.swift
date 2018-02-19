@@ -7,59 +7,41 @@
 //
 
 import UIKit
-import Contacts
+
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
         
-        if let filepath = Bundle.main.path(forResource: "cn", ofType: "contacts") {
-           do {
-               var contents = try String(contentsOfFile: filepath)
-              // print(contents)
-            
-                contents = ContactManager.shared.parseAndroidVCard(contents)
-            
-              if  let data = contents.data(using: String.Encoding.utf8){
-
-                ContactManager.shared.vCardToContactConverter(data, completionHandler: { (result) in
-
-                    switch result {
-
-                    case .success(response: let contacts):
-                    //    print(contacts)
-                        
-                        ContactManager.shared.addContact(contacts, completionHandler: { (result) in
-
-                            switch result {
-
-                            case .success(response: let isSaved):
-                                print(isSaved)
-                                break
-
-                            case .error(error: let error):
-                                print(error)
-                                break
-                            }
-                        })
-
-                        break
-                    case .error(error: let error):
-                        print(error)
-                        break
-
-                    }
-                })
-                }
-            } catch {
-
+        ContactsManagerFacade.fetchContacts { result in
+            switch result {
+            case .success(response: let contacts):
+                print(contacts)
+                break
+            case .error(error: let error):
+                print(error)
+                self.showDialog(forError: error)
+                break
+            }
         }
-       } else {
-
-       }
-    
+        
+        ContactManager.shared.requestAccess { (isAA) in
+            if isAA {
+                
+                ContactManager.shared.fetchContacts(completionHandler: { (result) in
+                    
+                })
+            }else{
+                
+            }
+        }
     }
-    
 }
 
+
+extension UIViewController {
+    func showDialog(forError: Error) {
+        // checked what is the error code
+        print("showing a dialog for contact perrmission")
+    }
+}

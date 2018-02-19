@@ -10,11 +10,12 @@ import Foundation
 import Contacts
 
 /**
- Result Enum
+ Represents the generic output result when working with contacts, such as fetching or adding (from vcard).
+ 
  - Author: Ahmad Almasri
  
  - success: Returns Array of Contacts
- - Error: Returns error
+ - error: Returns error
  */
 enum ContactsFetchResult {
     case success(response: [CNContact])
@@ -22,11 +23,12 @@ enum ContactsFetchResult {
 }
 
 /**
- Result Enum
+ Represents the generic output result when working with a single contact, such as fetching a contact -to check the duplication-.
+ 
  - Author: Ahmad Almasri
  
- - Success: Returns signal  Contact
- - Error: Returns error
+ - success: Returns signal  Contact
+ - error: Returns error
  */
 enum ContactFetchResult {
     case success(response: CNContact?)
@@ -34,7 +36,8 @@ enum ContactFetchResult {
 }
 
 /**
- Result enum
+ Represents the output result of working with operation tasks, such as add, update or delete.
+ 
  - Author: Ahmad Almasri
  
  - Success: Returns Bool
@@ -45,10 +48,8 @@ enum ContactOperationResult {
     case error(error: Error)
 }
 
-
-
 /**
- Result enum
+ Represents the output result of converting the contacts to vcard format.
  - Author: Ahmad Almasri
  
  - Success: Returns Data object
@@ -58,26 +59,41 @@ enum ContactsToVCardResult {
     case success(response: Data)
     case error(error: Error)
 }
+
 /**
- enuum  Transaction
+ Represents the contacts transaction type to be done when working with contacts.
  - Author: Ahmad Almasri
  
  - add: add new contacts
  - update: update contacts
  - delete: delete contacts
  */
-enum TransactionContact{
-    case add , update , delete
+enum TransactionContact {
+    case add, update, delete
 }
 
-
-// add doc
-class ContactManager {
+/**
+ This manager class is responsibile for any needed functionality to work with contacts, such as the CRUD transaction for all contacts as one chunk or as a single contact. Also, it handles the mapping of custom fields reveived from other platforms -such as Android so far-.
+ 
+  - Author: Ahmad Almasri
+ 
+ - Warning: By default, the accessing of the init of this class is denied, However, make sure to access this function by it *shared* property.
+ */
+ class ContactManager {
+    // TODO: name the dispatch queues labels.
+    
     
     //MARK:- shared
+    
+    /// the singleton instance for accessing the manager.
     static let shared = ContactManager()
     
-    private init(){}
+    //MARK:- Inits
+    private init() {
+        requestAccess { granted in
+            
+        }
+    }
     
     //MARK:- Permission
     /**
@@ -85,15 +101,18 @@ class ContactManager {
      - Author: Ahmad Almasri
      
      - Parameter requestGranted: Result as Bool
+     
+     - Note: any contacts functionality assumes that this method has been called and got granted as true, otherwise it would not be functional (roughtly speaking, all methods would return "Access Denied" error).
      */
+    var accessGranted = false
+    
+    
     func requestAccess(_ requestGranted: @escaping (Bool) -> ()) {
         
         CNContactStore().requestAccess(for: .contacts) { granted, _ in
             requestGranted(granted)
         }
     }
-    
-    
     
     //MARK:- Fetching
     /**
@@ -103,20 +122,22 @@ class ContactManager {
      - Parameter completionHandler: Returns Either [CNContact] or Error.
      */
     func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
-        
-        let contactStore = CNContactStore()
-        var contacts = [CNContact]()
-        
-        let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
-        do {
-            try contactStore.enumerateContacts(with: fetchRequest, usingBlock: {
-                contact, _ in
-                contacts.append(contact)
-                
-            })
-            completionHandler(ContactsFetchResult.success(response: contacts))
-        } catch {
-            completionHandler(ContactsFetchResult.error(error: error))
+        let concurrentQueue = DispatchQueue(label: getQueueLabel(#function))
+        concurrentQueue.async {
+            let contactStore = CNContactStore()
+            var contacts = [CNContact]()
+            
+            let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+            do {
+                try contactStore.enumerateContacts(with: fetchRequest, usingBlock: {
+                    contact, _ in
+                    contacts.append(contact)
+                    
+                })
+                completionHandler(ContactsFetchResult.success(response: contacts))
+            } catch {
+                completionHandler(ContactsFetchResult.error(error: error))
+            }
         }
     }
     
@@ -127,7 +148,7 @@ class ContactManager {
      - parameter identifiers: A value that uniquely identifies a contact on the device.
      - parameter completionHandler: Returns Either [CNContact] or Error.
      */
-    func getContactFromID(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
+    func getContactsByIdentifiers(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
         let contactStore = CNContactStore()
         var contacts = [CNContact]()
@@ -277,7 +298,7 @@ class ContactManager {
     }
     
     
-    //MARK:- Conversion
+    //MARK:- Conversions
     /*
      Convert [CNContacts] TO CSV
      Returns the vCard representation of the specified contacts.
@@ -320,6 +341,7 @@ class ContactManager {
     }
     
     
+    // MARK:- Helper Methods:
     /**
      Save contact into document
      - Author: Ahmad Almasri
@@ -345,13 +367,18 @@ class ContactManager {
         }
     }
     
-    
+    private func getQueueLabel(_ functionName: String) -> String {
+        let filePath = URL(fileURLWithPath: #file)
+        let lastComponenet = filePath.lastPathComponent
+        
+        return "\(lastComponenet).\(functionName)"
+    }
 }
 
 
 
 
-extension ContactManager{
+extension ContactManager {
     
     //MARK:- Enums
     /**
@@ -714,3 +741,24 @@ extension ContactManager{
     }
 }
 
+
+/// /// ///
+
+
+struct ContactsManagerFacade {
+    static func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
+        if PermissionHandler.getContactsPermission() {
+            ContactManager.shared.fetchContacts(completionHandler: completionHandler)
+        } else {
+            let error: NSError = NSError(domain: "Access Denied", code: 200)
+            completionHandler(.error(error: error))
+        }
+    }
+}
+
+
+struct PermissionHandler {
+    static func getContactsPermission() -> Bool {
+        return false
+    }
+}
