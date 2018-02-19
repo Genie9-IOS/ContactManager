@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ContactsToVCardResult Enumeration Reference</title>
+    <title>TransactionContact Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/ContactsToVCardResult" class="dashAnchor"></a>
-    <a title="ContactsToVCardResult Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Enum/TransactionContact" class="dashAnchor"></a>
+    <a title="TransactionContact Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (29% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ContactsToVCardResult Enumeration Reference
+        TransactionContact Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -81,21 +81,22 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ContactsToVCardResult</h1>
+            <h1>TransactionContact</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">ContactsToVCardResult</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TransactionContact</span></code></pre>
 
                 </div>
               </div>
-            <p>Result enum</p>
+            <p>enuum  Transaction</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
 
 </div>
-<li><p>Success: Returns Data object</p></li>
-<li><p>Error: Returns error</p></li>
+<li><p>add: add new contacts</p></li>
+<li><p>update: update contacts</p></li>
+<li><p>delete: delete contacts</p></li>
 
           </section>
           <section class="section task-group-section">
@@ -104,9 +105,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager21ContactsToVCardResultO7successAC10Foundation4DataV8response_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/success" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager21ContactsToVCardResultO7successAC10Foundation4DataV8response_tcACmF">success</a>
+                    <a name="/s:14ContactManager011TransactionA0O3addA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/add" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA0O3addA2CmF">add</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -121,23 +122,19 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">success</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">Data</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">add</span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6updateA2CmF">update</a></span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6deleteA2CmF">delete</a></span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager21ContactsToVCardResultO5errorACs5Error_pAD_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager21ContactsToVCardResultO5errorACs5Error_pAD_tcACmF">error</a>
+                    <a name="/s:14ContactManager011TransactionA0O6updateA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/update" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA0O6updateA2CmF">update</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -152,7 +149,34 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">error</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O3addA2CmF">add</a></span> <span class="p">,</span> <span class="n">update</span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6deleteA2CmF">delete</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager011TransactionA0O6deleteA2CmF"></a>
+                    <a name="//apple_ref/swift/Element/delete" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA0O6deleteA2CmF">delete</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O3addA2CmF">add</a></span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6updateA2CmF">update</a></span> <span class="p">,</span> <span class="n">delete</span></code></pre>
 
                         </div>
                       </div>

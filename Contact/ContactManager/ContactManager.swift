@@ -224,7 +224,7 @@ class ContactManager {
         case .delete:
             deleteContact()
             break
-     
+            
         }
         
     }
@@ -354,7 +354,26 @@ class ContactManager {
 extension ContactManager{
     
     //MARK:- Enums
-    
+    /**
+     Enum relation types from android
+     - Author: Ahmad Almasri
+
+     - other: custom label relation = 0
+     - assistant:  assistant relation in android = 1
+     - brother: brother relation in android = 2
+     - child:  child relation in android = 3
+     - domesticPartner:  domesticPartner relation in android = 4 Note: 4 and 10 same relation in ios
+     - father:  father relation in android = 5
+     - friend:  friend relation in android = 6
+     - manager:  manager relation in android = 7
+     - mother:  mother relation in android = 8
+     - parent:  parent relation in android = 9
+     - partner:  partner relation in android = 10
+     - referredBy:  referredBy relation in android = 11  Note: not available ios used custom label
+     - relative:  relative relation in android = 12  Note: not available ios used custom label
+     - sister:  sister relation in android = 13
+     - spouse:  spouse relation in android = 14
+     */
     private enum RelationType:String {
         case other = ""
         case assistant = "_$!<Assistant>!$_"
@@ -371,7 +390,7 @@ extension ContactManager{
         case relative = "Relative"
         case sister = "_$!<Sister>!$_"
         case spouse = "_$!<Spouse>!$_"
-
+        
         static  func getValue(_ hashValue:Int)->RelationType{
             switch hashValue {
             case 0:
@@ -408,17 +427,26 @@ extension ContactManager{
                 return .spouse
             }
         }
-       
+        
         
     }
     
+    /**
+     Enum Contact Event types from android
+     - Author: Ahmad Almasri
+
+     - anniversary:  anniversary Contact Event in android = 1
+     - other: other Contact Event in android = 2
+     - empty: custom label Contact Event = 0
+     - birthday: other Contact Event in android = 3
+     */
     private enum ContactEventType:String{
         
         case anniversary = "_$!<Anniversary>!$_"
         case other = "_$!<Other>!$_"
         case empty = ""
         case birthday = "_$!<Birthday>!$_"
-
+        
         static  func getValue(_ hashValue:Int)->ContactEventType{
             switch hashValue {
                 
@@ -434,15 +462,53 @@ extension ContactManager{
             }
         }
     }
-    
+    /**
+     check regx group 1 type
+     - Author: Ahmad Almasri
+
+     - nickname: nickname cursor item type
+     - relation: relation cursor item type
+     - contact_event: contact_event cursor item type
+     */
     private enum CursorItem:String {
-        case nickname, relation, contact_event
+        case nickname
+        case relation
+        case contact_event
     }
+    /**
+     InfoType matching regx pattern type
+     - Author: Ahmad Almasri
+
+     - tel:  is tel using tel pattern
+     - email: is email using email pattern
+     - image: is image using image pattern
+     */
     private enum InfoType:String {
         case tel, email, image
     }
- 
+    /**
+     Regex pattern
+     
+     - matchCursorPattern: match Cursor pattern
+     - telPattern: match tel pattern
+     - emailPattern: match email pattern
+     - imagePattern: match image pattern
+     */
+    private enum RegexVCard:String{
+        case matchCursorPattern = "X-ANDROID-CUSTOM[;:].*vnd\\.android\\.cursor\\.item\\/(.*?);(.*)"
+        case telPattern = "TEL;.*CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*):"
+        case emailPattern = "EMAIL;.*\\CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*)\\:"
+        case imagePattern = "PHOTO;ENCODING=.*JPEG:([\\s\\S]*?)(\\n\\n|END:VCARD|\\n\\r)"
+    }
     
+    //MARK:- Parse VCard
+    /**
+    parseAndroidVCard convert vCard android format to ios format
+       - Author: Ahmad Almasri
+     
+     - Parameter vCard: value of android vCard
+     - Returns: vCard formatted  ios
+     */
     func parseAndroidVCard(_ vCard:String)->String{
         
         let cursorItemResult = matchCursorItem(vCard)
@@ -454,6 +520,16 @@ extension ContactManager{
         
     }
     
+    //MARK:- Matching
+    /**
+     Checks is supplied string matches the pattern.
+     - Author: Ahmad Almasri
+
+     - Parameters:
+       - originalText: String to be matched to the pattern
+       - pattern: A pattern to be used with Regex
+     - Returns: array of matches include all groups and range
+    */
     private func matching(_ originalText:String, pattern: String)->[NSTextCheckingResult]{
         
         var re: NSRegularExpression!
@@ -466,9 +542,16 @@ extension ContactManager{
         let matches = re.matches(in: originalText, options: [], range: NSRange(location: 0, length: originalText.utf16.count))
         return matches
     }
+    
+    /**
+     matchCursorItem get matching and replace for ( nickname, relation , contact_event)
+     - Author: Ahmad Almasri
 
+     - Parameter originalText: String to be matched to the pattern
+     - Returns: vCard after format ( nickname, relation , contact_event)
+     */
     private func matchCursorItem(_ originalText:String)->String{
-        let matchCursorPattern = "X-ANDROID-CUSTOM[;:].*vnd\\.android\\.cursor\\.item\\/(.*?);(.*)"
+        let matchCursorPattern = RegexVCard.matchCursorPattern.rawValue
         var result = originalText
         let matches = matching(originalText, pattern: matchCursorPattern)
         var itemCount  = 0
@@ -478,40 +561,63 @@ extension ContactManager{
             let cursorItem = (originalText as NSString).substring(with: match.range(at: 1))
             let cursorItemValue = (originalText as NSString).substring(with: match.range(at: 2))
             //  let fullMatch = (originalText as NSString).substring(with: match.range(at: 0))
-            switch cursorItem {
             
+            switch cursorItem {
+                
             case CursorItem.nickname.rawValue :
-                result  = (result as NSString).replacingCharacters(in: range, with: "NICKNAME:\(cursorItemValue.split(separator: ";").first ?? "")")
+        
+                result  = (result as NSString).replacingCharacters(in: range, with:
+                    "NICKNAME:\(cursorItemValue.split(separator: ";").first ?? "")")
+                
                 break
+                
             case CursorItem.relation.rawValue :
-            //    RelationType.getValue(0).rawValue
-                result  = (result as NSString).replacingCharacters(in: range, with: "\(getCursorItemValue(cursorItemValue,index:itemCount, cursorItemType: .relation))")
+                
+                result  = (result as NSString).replacingCharacters(in: range, with:
+                    "\(getCursorItemValue(cursorItemValue,index:itemCount, cursorItemType: .relation))")
                 itemCount += 1
+                
                 break
+                
             case CursorItem.contact_event.rawValue :
-                result  = (result as NSString).replacingCharacters(in: range, with: "\(getCursorItemValue(cursorItemValue,index:itemCount, cursorItemType: .contact_event))")
+                
+                result  = (result as NSString).replacingCharacters(in: range, with:
+                    "\(getCursorItemValue(cursorItemValue,index:itemCount, cursorItemType: .contact_event))")
                 itemCount += 1
+                
                 break
+                
             default:
+                
                 break
             }
             
         }
+        
         return result
     }
+    /**
+     matchInfo get matching and replace for ( tel, email , images)
+     - Author: Ahmad Almasri
+
+     - Parameters:
+       - originalText: String to be matched to the pattern
+       - infoType: type of matching (tel , email or image)
+     - Returns: vCard after format ( tel, email , images
+     */
     private func matchInfo(_ originalText:String,infoType:InfoType)->String{
         var pattern = ""
         switch infoType {
         case .tel:
-            pattern = "TEL;.*CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*):"
+            pattern = RegexVCard.telPattern.rawValue
             break
         case .email:
-            pattern = "EMAIL;.*\\CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*)\\:"
+            pattern = RegexVCard.emailPattern.rawValue
             break
         case .image:
-            pattern = "PHOTO;ENCODING=.*JPEG:([\\s\\S]*?)(\\n\\n|END:VCARD|\\n\\r)"
+            pattern = RegexVCard.imagePattern.rawValue
             break
-      
+            
         }
         var result = originalText
         let matches = matching(originalText, pattern: pattern)
@@ -524,20 +630,20 @@ extension ContactManager{
             switch infoType{
             case .tel:
                 let cursorItemFirstValue = (cursorItem as NSString).components(separatedBy: ";").first ?? ""
-                let cursorItemFullValue = decodeQuotedPrintable(message: cursorItemFirstValue.replacingOccurrences(of: ")", with: ""))
-            
+                let cursorItemFullValue = decodeQuotedPrintable(cursorItemFirstValue.replacingOccurrences(of: ")", with: ""))
+                
                 result = (result as NSString).replacingCharacters(in: range, with: "TEL;\(cursorItemFullValue):")
                 
                 break
             case .email:
                 let cursorItemFirstValue = (cursorItem as NSString).components(separatedBy: ";").first ?? ""
-                let cursorItemFullValue = decodeQuotedPrintable(message: cursorItemFirstValue.replacingOccurrences(of: ")", with: ""))
+                let cursorItemFullValue = decodeQuotedPrintable( cursorItemFirstValue.replacingOccurrences(of: ")", with: ""))
                 
                 result = (result as NSString).replacingCharacters(in: range, with: "EMAIL;\(cursorItemFullValue):")
                 
                 break
             case .image:
-                 let cursorItemFullValue = String(cursorItem.filter { !" \n\t\r".contains($0) })
+                let cursorItemFullValue = String(cursorItem.filter { !" \n\t\r".contains($0) })
                 result = (result as NSString).replacingCharacters(in: range, with: "PHOTO;ENCODING=BASE64;JPEG:\(cursorItemFullValue)")
                 break
                 
@@ -547,13 +653,22 @@ extension ContactManager{
         }
         return result
     }
-    
+    /**
+     getCursorItemValue convert format item (relation, contact event) from android to ios
+     - Author: Ahmad Almasri
+
+     - Parameters:
+       - cursorItem: cursorItem value full fatching
+       - index: item count 1,2,3...N
+       - cursorItemType: fromat type (relation or contact event)
+     - Returns: CursorItemValue ios format
+     */
     private func getCursorItemValue(_ cursorItem: String, index:Int , cursorItemType:CursorItem) -> String {
         var result = [String]()
         let filteredComponenets = cursorItem.split(separator: ";")
         
         for name in filteredComponenets {
-            result.append(decodeQuotedPrintable(message:String(name)))
+            result.append(decodeQuotedPrintable(String(name)))
         }
         
         if cursorItemType == CursorItem.relation {
@@ -576,18 +691,26 @@ extension ContactManager{
     }
     
     
-    private func decodeQuotedPrintable(message : String) -> String {
+    //MARK:- Decoding
+    /**
+     Decode a quoted printable encoded string
+     - Author: Ahmad Almasri
+
+     - parameter string: String to decode
+     - returns: Decoded string
+     */
+    private func decodeQuotedPrintable(_ string : String) -> String {
         
-        var result =    message.replacingOccurrences(of: "=\r\n", with: "")
+        var result =    string.replacingOccurrences(of: "=\r\n", with: "")
             .replacingOccurrences(of: "=\n", with: "")
             .replacingOccurrences(of: "%", with: "%25")
             .replacingOccurrences(of: "=", with: "%").removingPercentEncoding
-        // takes a String or a literal
+        
         if (result ?? "").hasPrefix("X-") {
             
             result = (result! as NSString).replacingCharacters(in: NSRange.init(location: 0, length: 2), with: "")
         }
-        return result == nil ? message : result!
+        return result == nil ? string : result!
     }
 }
 
