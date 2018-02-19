@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ContactFetchResult Enumeration Reference</title>
+    <title>RegexVCard Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/ContactFetchResult" class="dashAnchor"></a>
-    <a title="ContactFetchResult Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Enum/RegexVCard" class="dashAnchor"></a>
+    <a title="RegexVCard Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (29% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ContactFetchResult Enumeration Reference
+        RegexVCard Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -103,21 +103,21 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ContactFetchResult</h1>
+            <h1>RegexVCard</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">ContactFetchResult</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">RegexVCard</span><span class="p">:</span><span class="kt">String</span></code></pre>
 
                 </div>
               </div>
-            <p>Represents the generic output result when working with a single contact, such as fetching a contact -to check the duplication-.</p>
-<div class="aside aside-author">
-    <p class="aside-title">Author</p>
-    <p>Ahmad Almasri</p>
+            <p>Regex pattern</p>
 
-</div>
-<li><p>success: Returns signal  Contact</p></li>
-<li><p>error: Returns error</p></li>
+<ul>
+<li>matchCursorPattern: match Cursor pattern</li>
+<li>telPattern: match tel pattern</li>
+<li>emailPattern: match email pattern</li>
+<li>imagePattern: match image pattern</li>
+</ul>
 
           </section>
           <section class="section task-group-section">
@@ -126,9 +126,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager0A11FetchResultO7successACSo9CNContactCSg8response_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/success" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager0A11FetchResultO7successACSo9CNContactCSg8response_tcACmF">success</a>
+                    <a name="/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO18matchCursorPatternA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/matchCursorPattern" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO18matchCursorPatternA2DmF">matchCursorPattern</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -143,7 +143,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">success</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">CNContact</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">matchCursorPattern</span> <span class="o">=</span> <span class="s">"X-ANDROID-CUSTOM[;:].*vnd</span><span class="se">\\</span><span class="s">.android</span><span class="se">\\</span><span class="s">.cursor</span><span class="se">\\</span><span class="s">.item</span><span class="se">\\</span><span class="s">/(.*?);(.*)"</span></code></pre>
 
                         </div>
                       </div>
@@ -157,9 +157,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager0A11FetchResultO5errorACs5Error_pAD_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager0A11FetchResultO5errorACs5Error_pAD_tcACmF">error</a>
+                    <a name="/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO10telPatternA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/telPattern" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO10telPatternA2DmF">telPattern</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -174,7 +174,69 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">error</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">telPattern</span> <span class="o">=</span> <span class="s">"TEL;.*CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*):"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO12emailPatternA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/emailPattern" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO12emailPatternA2DmF">emailPattern</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">emailPattern</span> <span class="o">=</span> <span class="s">"EMAIL;.*</span><span class="se">\\</span><span class="s">CHARSET=UTF-8[;,]ENCODING=QUOTED-PRINTABLE[:,](.*)</span><span class="se">\\</span><span class="s">:"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO12imagePatternA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/imagePattern" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO12imagePatternA2DmF">imagePattern</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">imagePattern</span> <span class="o">=</span> <span class="s">"PHOTO;ENCODING=.*JPEG:([</span><span class="se">\\</span><span class="s">s</span><span class="se">\\</span><span class="s">S]*?)(</span><span class="se">\\</span><span class="s">n</span><span class="se">\\</span><span class="s">n|END:VCARD|</span><span class="se">\\</span><span class="s">n</span><span class="se">\\</span><span class="s">r)"</span></code></pre>
 
                         </div>
                       </div>

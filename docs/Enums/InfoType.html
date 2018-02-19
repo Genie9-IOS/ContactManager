@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ContactFetchResult Enumeration Reference</title>
+    <title>InfoType Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/ContactFetchResult" class="dashAnchor"></a>
-    <a title="ContactFetchResult Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Enum/InfoType" class="dashAnchor"></a>
+    <a title="InfoType Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (29% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ContactFetchResult Enumeration Reference
+        InfoType Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -103,21 +103,22 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ContactFetchResult</h1>
+            <h1>InfoType</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">ContactFetchResult</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">InfoType</span><span class="p">:</span><span class="kt">String</span></code></pre>
 
                 </div>
               </div>
-            <p>Represents the generic output result when working with a single contact, such as fetching a contact -to check the duplication-.</p>
+            <p>InfoType matching regx pattern type</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
 
 </div>
-<li><p>success: Returns signal  Contact</p></li>
-<li><p>error: Returns error</p></li>
+<li><p>tel:  is tel using tel pattern</p></li>
+<li><p>email: is email using email pattern</p></li>
+<li><p>image: is image using image pattern</p></li>
 
           </section>
           <section class="section task-group-section">
@@ -126,9 +127,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager0A11FetchResultO7successACSo9CNContactCSg8response_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/success" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager0A11FetchResultO7successACSo9CNContactCSg8response_tcACmF">success</a>
+                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/tel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF">tel</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -143,23 +144,19 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">success</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">CNContact</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tel</span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF">email</a></span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF">image</a></span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager0A11FetchResultO5errorACs5Error_pAD_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager0A11FetchResultO5errorACs5Error_pAD_tcACmF">error</a>
+                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/email" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF">email</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -174,7 +171,34 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">error</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF">tel</a></span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF">image</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/image" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF">image</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF">tel</a></span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF">email</a></span><span class="p">,</span> <span class="n">image</span></code></pre>
 
                         </div>
                       </div>

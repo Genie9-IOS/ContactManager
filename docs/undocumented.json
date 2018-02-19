@@ -58,359 +58,436 @@
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": null,
-      "symbol": "ContactManager",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 20,
+      "line": 21,
       "symbol": "ContactsFetchResult.success",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 21,
+      "line": 22,
       "symbol": "ContactsFetchResult.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 32,
+      "line": 34,
       "symbol": "ContactFetchResult.success",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 33,
+      "line": 35,
       "symbol": "ContactFetchResult.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 44,
+      "line": 47,
       "symbol": "ContactOperationResult.success",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 45,
+      "line": 48,
       "symbol": "ContactOperationResult.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 58,
+      "line": 59,
       "symbol": "ContactsToVCardResult.success",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 59,
+      "line": 60,
       "symbol": "ContactsToVCardResult.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 70,
+      "line": 72,
       "symbol": "TransactionContact.add",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 70,
+      "line": 72,
       "symbol": "TransactionContact.delete",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 70,
+      "line": 72,
       "symbol": "TransactionContact.update",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 75,
-      "symbol": "ContactManager",
-      "symbol_kind": "source.lang.swift.decl.class",
+      "line": 96,
+      "symbol": "RelationType.other",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 78,
-      "symbol": "ContactManager.shared",
-      "symbol_kind": "source.lang.swift.decl.var.static",
+      "line": 97,
+      "symbol": "RelationType.assistant",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 80,
+      "line": 98,
+      "symbol": "RelationType.brother",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 99,
+      "symbol": "RelationType.child",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 100,
+      "symbol": "RelationType.domesticPartner",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 101,
+      "symbol": "RelationType.father",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 102,
+      "symbol": "RelationType.friend",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 103,
+      "symbol": "RelationType.manager",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 104,
+      "symbol": "RelationType.mother",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 105,
+      "symbol": "RelationType.parent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 106,
+      "symbol": "RelationType.partner",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 107,
+      "symbol": "RelationType.referredBy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 108,
+      "symbol": "RelationType.relative",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 109,
+      "symbol": "RelationType.sister",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 110,
+      "symbol": "RelationType.spouse",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 112,
+      "symbol": "RelationType.getValue(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 163,
+      "symbol": "ContactEventType.anniversary",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 164,
+      "symbol": "ContactEventType.other",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 165,
+      "symbol": "ContactEventType.empty",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 166,
+      "symbol": "ContactEventType.birthday",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 168,
+      "symbol": "ContactEventType.getValue(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 192,
+      "symbol": "CursorItem.nickname",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 193,
+      "symbol": "CursorItem.relation",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 194,
+      "symbol": "CursorItem.contact_event",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 205,
+      "symbol": "InfoType.email",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 205,
+      "symbol": "InfoType.image",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 205,
+      "symbol": "InfoType.tel",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 216,
+      "symbol": "RegexVCard.matchCursorPattern",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 217,
+      "symbol": "RegexVCard.telPattern",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 218,
+      "symbol": "RegexVCard.emailPattern",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 219,
+      "symbol": "RegexVCard.imagePattern",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 228,
+      "symbol": "ErrorCode.accessDenied",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
+      "line": 247,
       "symbol": "ContactManager.init()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 176,
+      "line": 329,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).executeRequest()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 185,
+      "line": 338,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).addContact()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 196,
+      "line": 349,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).deleteContact()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 207,
+      "line": 360,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).updateContact()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 289,
+      "line": 442,
       "symbol": "ContactManager.contactsToVCardConverter(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 378,
-      "symbol": "ContactManager.RelationType.other",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 502,
+      "symbol": "ContactManager.getQueueLabel(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 379,
-      "symbol": "ContactManager.RelationType.assistant",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 729,
+      "symbol": "ContactsManagerFacade",
+      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 380,
-      "symbol": "ContactManager.RelationType.brother",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 381,
-      "symbol": "ContactManager.RelationType.child",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 382,
-      "symbol": "ContactManager.RelationType.domesticPartner",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 383,
-      "symbol": "ContactManager.RelationType.father",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 384,
-      "symbol": "ContactManager.RelationType.friend",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 385,
-      "symbol": "ContactManager.RelationType.manager",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 386,
-      "symbol": "ContactManager.RelationType.mother",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 387,
-      "symbol": "ContactManager.RelationType.parent",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 388,
-      "symbol": "ContactManager.RelationType.partner",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 389,
-      "symbol": "ContactManager.RelationType.referredBy",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 390,
-      "symbol": "ContactManager.RelationType.relative",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 391,
-      "symbol": "ContactManager.RelationType.sister",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 392,
-      "symbol": "ContactManager.RelationType.spouse",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 394,
-      "symbol": "ContactManager.RelationType.getValue(_:)",
+      "line": 731,
+      "symbol": "ContactsManagerFacade.fetchContacts(completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 445,
-      "symbol": "ContactManager.ContactEventType.anniversary",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 446,
-      "symbol": "ContactManager.ContactEventType.other",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 447,
-      "symbol": "ContactManager.ContactEventType.empty",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 448,
-      "symbol": "ContactManager.ContactEventType.birthday",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 450,
-      "symbol": "ContactManager.ContactEventType.getValue(_:)",
+      "line": 743,
+      "symbol": "ContactsManagerFacade.getContactsByIdentifiers(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 474,
-      "symbol": "ContactManager.CursorItem.nickname",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 755,
+      "symbol": "ContactsManagerFacade.getcContactByFullName(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 475,
-      "symbol": "ContactManager.CursorItem.relation",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 767,
+      "symbol": "ContactsManagerFacade.addContact(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 476,
-      "symbol": "ContactManager.CursorItem.contact_event",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 780,
+      "symbol": "ContactsManagerFacade.updateContact(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 487,
-      "symbol": "ContactManager.InfoType.email",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 793,
+      "symbol": "ContactsManagerFacade.deleteContact(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 487,
-      "symbol": "ContactManager.InfoType.image",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 805,
+      "symbol": "ContactsManagerFacade.contactsToVCardConverter(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 487,
-      "symbol": "ContactManager.InfoType.tel",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 811,
+      "symbol": "ContactsManagerFacade.vCardToContactConverter(_:completionHandler:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 498,
-      "symbol": "ContactManager.RegexVCard.matchCursorPattern",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 816,
+      "symbol": "ContactsManagerFacade.parseAndroidVCard(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 499,
-      "symbol": "ContactManager.RegexVCard.telPattern",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 826,
+      "symbol": "PermissionHandler",
+      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 500,
-      "symbol": "ContactManager.RegexVCard.emailPattern",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 501,
-      "symbol": "ContactManager.RegexVCard.imagePattern",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "line": 846,
+      "symbol": "UIViewController.showDialog(forError:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {

@@ -36,21 +36,6 @@
                 <a href="Classes/ContactManager.html">ContactManager</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/ContactManager/RelationType.html">– RelationType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/ContactEventType.html">– ContactEventType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/CursorItem.html">– CursorItem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/InfoType.html">– InfoType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/RegexVCard.html">– RegexVCard</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/ViewController.html">ViewController</a>
               </li>
             </ul>
@@ -58,6 +43,9 @@
           <li class="nav-group-name">
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ContactEventType.html">ContactEventType</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Enums/ContactFetchResult.html">ContactFetchResult</a>
               </li>
@@ -71,7 +59,41 @@
                 <a href="Enums/ContactsToVCardResult.html">ContactsToVCardResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/CursorItem.html">CursorItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ErrorCode.html">ErrorCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/InfoType.html">InfoType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RegexVCard.html">RegexVCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RelationType.html">RelationType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/TransactionContact.html">TransactionContact</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/UIViewController.html">UIViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/ContactsManagerFacade.html">ContactsManagerFacade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PermissionHandler.html">PermissionHandler</a>
               </li>
             </ul>
           </li>
@@ -100,14 +122,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Result Enum</p>
+                        <p>Represents the generic output result when working with contacts, such as fetching or adding (from vcard).</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
 
 </div>
 <li><p>success: Returns Array of Contacts</p></li>
-<li><p>Error: Returns error</p></li>
+<li><p>error: Returns error</p></li>
 
                         <a href="Enums/ContactsFetchResult.html" class="slightly-smaller">See more</a>
                       </div>
@@ -135,14 +157,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Result Enum</p>
+                        <p>Represents the generic output result when working with a single contact, such as fetching a contact -to check the duplication-.</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
 
 </div>
-<li><p>Success: Returns signal  Contact</p></li>
-<li><p>Error: Returns error</p></li>
+<li><p>success: Returns signal  Contact</p></li>
+<li><p>error: Returns error</p></li>
 
                         <a href="Enums/ContactFetchResult.html" class="slightly-smaller">See more</a>
                       </div>
@@ -170,7 +192,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Result enum</p>
+                        <p>Represents the output result of working with operation tasks, such as add, update or delete.</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
@@ -205,7 +227,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Result enum</p>
+                        <p>Represents the output result of converting the contacts to vcard format.</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
@@ -230,9 +252,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager011TransactionA0O"></a>
+                    <a name="/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO"></a>
                     <a name="//apple_ref/swift/Enum/TransactionContact" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager011TransactionA0O">TransactionContact</a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO">TransactionContact</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -240,7 +262,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>enuum  Transaction</p>
+                        <p>Represents the contacts transaction type to be done when working with contacts.</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
@@ -256,7 +278,231 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TransactionContact</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">TransactionContact</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager12RelationType33_4FF249FD371F831F81FD4436469E74DDLLO"></a>
+                    <a name="//apple_ref/swift/Enum/RelationType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager12RelationType33_4FF249FD371F831F81FD4436469E74DDLLO">RelationType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enum relation types from android</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Ahmad Almasri</p>
+
+</div>
+<li><p>other: custom label relation = 0</p></li>
+<li><p>assistant:  assistant relation in android = 1</p></li>
+<li><p>brother: brother relation in android = 2</p></li>
+<li><p>child:  child relation in android = 3</p></li>
+<li><p>domesticPartner:  domesticPartner relation in android = 4 Note: 4 and 10 same relation in ios</p></li>
+<li><p>father:  father relation in android = 5</p></li>
+<li><p>friend:  friend relation in android = 6</p></li>
+<li><p>manager:  manager relation in android = 7</p></li>
+<li><p>mother:  mother relation in android = 8</p></li>
+<li><p>parent:  parent relation in android = 9</p></li>
+<li><p>partner:  partner relation in android = 10</p></li>
+<li><p>referredBy:  referredBy relation in android = 11  Note: not available ios used custom label</p></li>
+<li><p>relative:  relative relation in android = 12  Note: not available ios used custom label</p></li>
+<li><p>sister:  sister relation in android = 13</p></li>
+<li><p>spouse:  spouse relation in android = 14</p></li>
+
+                        <a href="Enums/RelationType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">RelationType</span><span class="p">:</span><span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO"></a>
+                    <a name="//apple_ref/swift/Enum/ContactEventType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO">ContactEventType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Enum Contact Event types from android</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Ahmad Almasri</p>
+
+</div>
+<li><p>anniversary:  anniversary Contact Event in android = 1</p></li>
+<li><p>other: other Contact Event in android = 2</p></li>
+<li><p>empty: custom label Contact Event = 0</p></li>
+<li><p>birthday: other Contact Event in android = 3</p></li>
+
+                        <a href="Enums/ContactEventType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">ContactEventType</span><span class="p">:</span><span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO"></a>
+                    <a name="//apple_ref/swift/Enum/CursorItem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO">CursorItem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>check regx group 1 type</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Ahmad Almasri</p>
+
+</div>
+<li><p>nickname: nickname cursor item type</p></li>
+<li><p>relation: relation cursor item type</p></li>
+<li><p>contact_event: contact_event cursor item type</p></li>
+
+                        <a href="Enums/CursorItem.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">CursorItem</span><span class="p">:</span><span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO"></a>
+                    <a name="//apple_ref/swift/Enum/InfoType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO">InfoType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>InfoType matching regx pattern type</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Ahmad Almasri</p>
+
+</div>
+<li><p>tel:  is tel using tel pattern</p></li>
+<li><p>email: is email using email pattern</p></li>
+<li><p>image: is image using image pattern</p></li>
+
+                        <a href="Enums/InfoType.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">InfoType</span><span class="p">:</span><span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO"></a>
+                    <a name="//apple_ref/swift/Enum/RegexVCard" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10RegexVCard33_4FF249FD371F831F81FD4436469E74DDLLO">RegexVCard</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Regex pattern</p>
+
+<ul>
+<li>matchCursorPattern: match Cursor pattern</li>
+<li>telPattern: match tel pattern</li>
+<li>emailPattern: match email pattern</li>
+<li>imagePattern: match image pattern</li>
+</ul>
+
+                        <a href="Enums/RegexVCard.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">RegexVCard</span><span class="p">:</span><span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager9ErrorCode33_4FF249FD371F831F81FD4436469E74DDLLO"></a>
+                    <a name="//apple_ref/swift/Enum/ErrorCode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager9ErrorCode33_4FF249FD371F831F81FD4436469E74DDLLO">ErrorCode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>custom Error code</p>
+
+<ul>
+<li>accessDenied: Don&rsquo;t have permission</li>
+</ul>
+
+                        <a href="Enums/ErrorCode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">ErrorCode</span><span class="p">:</span><span class="kt">Int</span></code></pre>
 
                         </div>
                       </div>

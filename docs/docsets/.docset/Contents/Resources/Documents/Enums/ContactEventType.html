@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AppDelegate Class Reference</title>
+    <title>ContactEventType Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Class/AppDelegate" class="dashAnchor"></a>
-    <a title="AppDelegate Class Reference"></a>
+    <a name="//apple_ref/swift/Enum/ContactEventType" class="dashAnchor"></a>
+    <a title="ContactEventType Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (29% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        AppDelegate Class Reference
+        ContactEventType Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -103,14 +103,23 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>AppDelegate</h1>
+            <h1>ContactEventType</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIApplicationDelegate</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">ContactEventType</span><span class="p">:</span><span class="kt">String</span></code></pre>
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>Enum Contact Event types from android</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Ahmad Almasri</p>
+
+</div>
+<li><p>anniversary:  anniversary Contact Event in android = 1</p></li>
+<li><p>other: other Contact Event in android = 2</p></li>
+<li><p>empty: custom label Contact Event = 0</p></li>
+<li><p>birthday: other Contact Event in android = 3</p></li>
 
           </section>
           <section class="section task-group-section">
@@ -119,9 +128,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(py)window"></a>
-                    <a name="//apple_ref/swift/Property/window" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(py)window">window</a>
+                    <a name="/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO11anniversaryA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/anniversary" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO11anniversaryA2DmF">anniversary</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -136,19 +145,23 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">window</span><span class="p">:</span> <span class="kt">UIWindow</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">anniversary</span> <span class="o">=</span> <span class="s">"_$!&lt;Anniversary&gt;!$_"</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(im)application:didFinishLaunchingWithOptions:"></a>
-                    <a name="//apple_ref/swift/Method/application(_:didFinishLaunchingWithOptions:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(im)application:didFinishLaunchingWithOptions:">application(_:didFinishLaunchingWithOptions:)</a>
+                    <a name="/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO5otherA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/other" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO5otherA2DmF">other</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -163,19 +176,23 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplicationLaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">other</span> <span class="o">=</span> <span class="s">"_$!&lt;Other&gt;!$_"</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationWillResignActive:"></a>
-                    <a name="//apple_ref/swift/Method/applicationWillResignActive(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationWillResignActive:">applicationWillResignActive(_:)</a>
+                    <a name="/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO5emptyA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/empty" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO5emptyA2DmF">empty</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -190,19 +207,23 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationWillResignActive</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">empty</span> <span class="o">=</span> <span class="s">""</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationDidEnterBackground:"></a>
-                    <a name="//apple_ref/swift/Method/applicationDidEnterBackground(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationDidEnterBackground:">applicationDidEnterBackground(_:)</a>
+                    <a name="/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO8birthdayA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/birthday" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO8birthdayA2DmF">birthday</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -217,19 +238,23 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationDidEnterBackground</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">birthday</span> <span class="o">=</span> <span class="s">"_$!&lt;Birthday&gt;!$_"</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationWillEnterForeground:"></a>
-                    <a name="//apple_ref/swift/Method/applicationWillEnterForeground(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationWillEnterForeground:">applicationWillEnterForeground(_:)</a>
+                    <a name="/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO8getValueADSiFZ"></a>
+                    <a name="//apple_ref/swift/Method/getValue(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager0A9EventType33_4FF249FD371F831F81FD4436469E74DDLLO8getValueADSiFZ">getValue(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -244,61 +269,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationWillEnterForeground</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationDidBecomeActive:"></a>
-                    <a name="//apple_ref/swift/Method/applicationDidBecomeActive(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationDidBecomeActive:">applicationDidBecomeActive(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationDidBecomeActive</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationWillTerminate:"></a>
-                    <a name="//apple_ref/swift/Method/applicationWillTerminate(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@M@ContactManager@objc(cs)AppDelegate(im)applicationWillTerminate:">applicationWillTerminate(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">applicationWillTerminate</span><span class="p">(</span><span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">static</span>  <span class="kd">func</span> <span class="nf">getValue</span><span class="p">(</span><span class="n">_</span> <span class="nv">hashValue</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span><span class="o">-&gt;</span><span class="kt">ContactEventType</span></code></pre>
 
                         </div>
                       </div>

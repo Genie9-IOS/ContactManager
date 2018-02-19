@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ContactFetchResult Enumeration Reference</title>
+    <title>CursorItem Enumeration Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/ContactFetchResult" class="dashAnchor"></a>
-    <a title="ContactFetchResult Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Enum/CursorItem" class="dashAnchor"></a>
+    <a title="CursorItem Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (29% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ContactFetchResult Enumeration Reference
+        CursorItem Enumeration Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -103,21 +103,22 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ContactFetchResult</h1>
+            <h1>CursorItem</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">ContactFetchResult</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">CursorItem</span><span class="p">:</span><span class="kt">String</span></code></pre>
 
                 </div>
               </div>
-            <p>Represents the generic output result when working with a single contact, such as fetching a contact -to check the duplication-.</p>
+            <p>check regx group 1 type</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
 
 </div>
-<li><p>success: Returns signal  Contact</p></li>
-<li><p>error: Returns error</p></li>
+<li><p>nickname: nickname cursor item type</p></li>
+<li><p>relation: relation cursor item type</p></li>
+<li><p>contact_event: contact_event cursor item type</p></li>
 
           </section>
           <section class="section task-group-section">
@@ -126,9 +127,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager0A11FetchResultO7successACSo9CNContactCSg8response_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/success" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager0A11FetchResultO7successACSo9CNContactCSg8response_tcACmF">success</a>
+                    <a name="/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO8nicknameA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/nickname" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO8nicknameA2DmF">nickname</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -143,7 +144,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">success</span><span class="p">(</span><span class="nv">response</span><span class="p">:</span> <span class="kt">CNContact</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">nickname</span></code></pre>
 
                         </div>
                       </div>
@@ -157,9 +158,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager0A11FetchResultO5errorACs5Error_pAD_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/error" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager0A11FetchResultO5errorACs5Error_pAD_tcACmF">error</a>
+                    <a name="/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO8relationA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/relation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO8relationA2DmF">relation</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -174,7 +175,38 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">error</span><span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">relation</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO13contact_eventA2DmF"></a>
+                    <a name="//apple_ref/swift/Element/contact_event" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ContactManager10CursorItem33_4FF249FD371F831F81FD4436469E74DDLLO13contact_eventA2DmF">contact_event</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">contact_event</span></code></pre>
 
                         </div>
                       </div>

@@ -37,21 +37,6 @@
                 <a href="../Classes/ContactManager.html">ContactManager</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/ContactManager/RelationType.html">– RelationType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/ContactManager/ContactEventType.html">– ContactEventType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/ContactManager/CursorItem.html">– CursorItem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/ContactManager/InfoType.html">– InfoType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/ContactManager/RegexVCard.html">– RegexVCard</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Classes/ViewController.html">ViewController</a>
               </li>
             </ul>
@@ -59,6 +44,9 @@
           <li class="nav-group-name">
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ContactEventType.html">ContactEventType</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Enums/ContactFetchResult.html">ContactFetchResult</a>
               </li>
@@ -72,7 +60,41 @@
                 <a href="../Enums/ContactsToVCardResult.html">ContactsToVCardResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/CursorItem.html">CursorItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ErrorCode.html">ErrorCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/InfoType.html">InfoType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RegexVCard.html">RegexVCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RelationType.html">RelationType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/TransactionContact.html">TransactionContact</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UIViewController.html">UIViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ContactsManagerFacade.html">ContactsManagerFacade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PermissionHandler.html">PermissionHandler</a>
               </li>
             </ul>
           </li>
@@ -84,11 +106,11 @@
             <h1>TransactionContact</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TransactionContact</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">TransactionContact</span></code></pre>
 
                 </div>
               </div>
-            <p>enuum  Transaction</p>
+            <p>Represents the contacts transaction type to be done when working with contacts.</p>
 <div class="aside aside-author">
     <p class="aside-title">Author</p>
     <p>Ahmad Almasri</p>
@@ -105,9 +127,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager011TransactionA0O3addA2CmF"></a>
+                    <a name="/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO3addA2DmF"></a>
                     <a name="//apple_ref/swift/Element/add" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager011TransactionA0O3addA2CmF">add</a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO3addA2DmF">add</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -122,7 +144,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">add</span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6updateA2CmF">update</a></span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6deleteA2CmF">delete</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">add</span><span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6updateA2DmF">update</a></span><span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6deleteA2DmF">delete</a></span></code></pre>
 
                         </div>
                       </div>
@@ -132,9 +154,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager011TransactionA0O6updateA2CmF"></a>
+                    <a name="/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6updateA2DmF"></a>
                     <a name="//apple_ref/swift/Element/update" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager011TransactionA0O6updateA2CmF">update</a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6updateA2DmF">update</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -149,7 +171,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O3addA2CmF">add</a></span> <span class="p">,</span> <span class="n">update</span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6deleteA2CmF">delete</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO3addA2DmF">add</a></span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6deleteA2DmF">delete</a></span></code></pre>
 
                         </div>
                       </div>
@@ -159,9 +181,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager011TransactionA0O6deleteA2CmF"></a>
+                    <a name="/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6deleteA2DmF"></a>
                     <a name="//apple_ref/swift/Element/delete" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager011TransactionA0O6deleteA2CmF">delete</a>
+                    <a class="token" href="#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6deleteA2DmF">delete</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -176,7 +198,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O3addA2CmF">add</a></span> <span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA0O6updateA2CmF">update</a></span> <span class="p">,</span> <span class="n">delete</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO3addA2DmF">add</a></span><span class="p">,</span> <span class="n"><a href="../Enums/TransactionContact.html#/s:14ContactManager011TransactionA033_4FF249FD371F831F81FD4436469E74DDLLO6updateA2DmF">update</a></span><span class="p">,</span> <span class="n">delete</span></code></pre>
 
                         </div>
                       </div>

@@ -36,21 +36,6 @@
                 <a href="Classes/ContactManager.html">ContactManager</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes/ContactManager/RelationType.html">– RelationType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/ContactEventType.html">– ContactEventType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/CursorItem.html">– CursorItem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/InfoType.html">– InfoType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Classes/ContactManager/RegexVCard.html">– RegexVCard</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Classes/ViewController.html">ViewController</a>
               </li>
             </ul>
@@ -58,6 +43,9 @@
           <li class="nav-group-name">
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ContactEventType.html">ContactEventType</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Enums/ContactFetchResult.html">ContactFetchResult</a>
               </li>
@@ -71,7 +59,41 @@
                 <a href="Enums/ContactsToVCardResult.html">ContactsToVCardResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/CursorItem.html">CursorItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ErrorCode.html">ErrorCode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/InfoType.html">InfoType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RegexVCard.html">RegexVCard</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RelationType.html">RelationType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/TransactionContact.html">TransactionContact</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/UIViewController.html">UIViewController</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/ContactsManagerFacade.html">ContactsManagerFacade</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PermissionHandler.html">PermissionHandler</a>
               </li>
             </ul>
           </li>
@@ -122,9 +144,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManagerAAC"></a>
+                    <a name="/s:14ContactManagerAA33_4FF249FD371F831F81FD4436469E74DDLLC"></a>
                     <a name="//apple_ref/swift/Class/ContactManager" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManagerAAC">ContactManager</a>
+                    <a class="token" href="#/s:14ContactManagerAA33_4FF249FD371F831F81FD4436469E74DDLLC">ContactManager</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -132,7 +154,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>This manager class is responsibile for any needed functionality to work with contacts, such as the CRUD transaction for all contacts as one chunk or as a single contact. Also, it handles the mapping of custom fields reveived from other platforms -such as Android so far-.</p>
+<div class="aside aside-author">
+    <p class="aside-title">Author</p>
+    <p>Ahmad Almasri</p>
+
+</div>
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>By default, the accessing of the init of this class is denied, However, make sure to access this function by it <em>shared</em> property.</p>
+
+</div>
 
                         <a href="Classes/ContactManager.html" class="slightly-smaller">See more</a>
                       </div>
@@ -140,7 +172,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">ContactManager</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">class</span> <span class="kt">ContactManager</span></code></pre>
 
                         </div>
                       </div>
