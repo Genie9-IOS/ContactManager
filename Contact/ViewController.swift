@@ -13,18 +13,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ContactsManagerFacade.fetchContacts { result in
-            switch result {
-            case .success(response: let contacts):
-                print(contacts)
-                break
+        ContactsManagerFacade.getContactsCount { (result) in
+            switch  result {
+                
+            case .success(response: let count):
+                print(count)
             case .error(error: let error):
                 print(error)
-                self.showDialog(forError: error)
-                break
             }
-        }
         
+        }
     }
 }
 

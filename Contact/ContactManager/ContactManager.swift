@@ -17,7 +17,7 @@ import UIKit
  - success: Returns Array of Contacts
  - error: Returns error
  */
- enum ContactsFetchResult {
+enum ContactsFetchResult {
     case success(response: [CNContact])
     case error(error: Error)
 }
@@ -30,7 +30,7 @@ import UIKit
  - success: Returns signal  Contact
  - error: Returns error
  */
- enum ContactFetchResult {
+enum ContactFetchResult {
     case success(response: CNContact?)
     case error(error: Error)
 }
@@ -43,7 +43,7 @@ import UIKit
  - Success: Returns Bool
  - Error: Returns error
  */
- enum ContactOperationResult {
+enum ContactOperationResult {
     case success(response: Bool)
     case error(error: Error)
 }
@@ -55,8 +55,20 @@ import UIKit
  - Success: Returns Data object
  - Error: Returns error
  */
-  enum ContactsToVCardResult {
+enum ContactsToVCardResult {
     case success(response: Data)
+    case error(error: Error)
+}
+
+/**
+ Represents the output result of contacts count.
+ - Author: Ahmad Almasri
+ 
+ - Success: Returns number of contacts
+ - Error: Returns error
+ */
+enum ContactsCountResult {
+    case success(response: Int)
     case error(error: Error)
 }
 
@@ -219,9 +231,9 @@ private enum RegexVCard:String{
     case imagePattern = "PHOTO;ENCODING=.*JPEG:([\\s\\S]*?)(\\n\\n|END:VCARD|\\n\\r)"
 }
 
- /**
+/**
  custom Error code
-
+ 
  - accessDenied: Don't have permission
  */
 private enum ErrorCode:Int {
@@ -248,37 +260,75 @@ private class ContactManager {
     
     //MARK:- Fetching
     /**
-     Fetching Contacts from phone
+     Fetching Contacts from phone on Background thread
      - Author: Ahmad Almasri
      
      - Parameter completionHandler: Returns Either [CNContact] or Error.
+     - Parameter result: enum type ContactsFetchResult.
+     
+     - Warning:If The user has more than one container (i.e. an Exchange and an iCloud account which both are used to store contacts), this would only load the contacts from the account that is configured as the default. Therefore, it would not load all contacts.
+     
+     for  get all the containers and iterate over them to extract all contacts from each of them
      */
-    func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
+    func fetchContactsOnBackgroundThread(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         let concurrentQueue = DispatchQueue(label: getQueueLabel(#function))
         concurrentQueue.async {
             let contactStore = CNContactStore()
             var contacts = [CNContact]()
-            
-            let fetchRequest: CNContactFetchRequest = CNContactFetchRequest(keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+            var allContainers  = [CNContainer]()
             do {
-                try contactStore.enumerateContacts(with: fetchRequest, usingBlock: {
-                    contact, _ in
-                    contacts.append(contact)
+                allContainers = try contactStore.containers(matching: nil)
+                for container in allContainers {
+                    let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
                     
-                })
+                    let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                    contacts.append(contentsOf: containerResults)
+                }
                 completionHandler(ContactsFetchResult.success(response: contacts))
             } catch {
                 completionHandler(ContactsFetchResult.error(error: error))
             }
+            
         }
     }
     
+    /**
+     Fetching Contacts from phone
+     - Author: Ahmad Almasri
+     
+     - Parameter completionHandler: Returns Either [CNContact] or Error.
+     - Parameter result: enum type ContactsFetchResult.
+     
+     - Warning:If The user has more than one container (i.e. an Exchange and an iCloud account which both are used to store contacts), this would only load the contacts from the account that is configured as the default. Therefore, it would not load all contacts .
+     
+     for  get all the containers and iterate over them to extract all contacts from each of them
+     */
+    func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
+        
+        let contactStore = CNContactStore()
+        var contacts = [CNContact]()
+        var allContainers  = [CNContainer]()
+        
+        do {
+            allContainers = try contactStore.containers(matching: nil)
+            for container in allContainers {
+                let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+                
+                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                contacts.append(contentsOf: containerResults)
+            }
+            completionHandler(ContactsFetchResult.success(response: contacts))
+        } catch {
+            completionHandler(ContactsFetchResult.error(error: error))
+        }
+    }
     /**
      Get CNContact From Identifier
      - Author: Ahmad Almasri
      
      - parameter identifiers: A value that uniquely identifies a contact on the device.
      - parameter completionHandler: Returns Either [CNContact] or Error.
+     - parameter result: enum type ContactsFetchResult.
      */
     func getContactsByIdentifiers(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
@@ -299,6 +349,7 @@ private class ContactManager {
      
      - parameter contact: A value that contact user
      - parameter completionHandler: Returns Either CNContact or Error.
+     - parameter result: enum type ContactFetchResult.
      */
     func getcContactByFullName(_ contact: CNContact, completionHandler: @escaping (_ result: ContactFetchResult) -> ()) {
         
@@ -313,14 +364,47 @@ private class ContactManager {
         }
     }
     
-    //MARK:- Transaction
+    /**
+     get number of contacts
+     
+     - Parameter completionHandler: completionHandler: Returns Either contactCount or Error
+     - Parameter result: enum type ContactsCountResult.
+     
+     - Warning:If The user has more than one container (i.e. an Exchange and an iCloud account which both are used to store contacts), this would only load the contacts from the account that is configured as the default. Therefore, it would not load all contacts .
+     
+     for  get all the containers and iterate over them to extract all contacts from each of them
+     */
+    func getContactsCount(completionHandler: @escaping (_ result: ContactsCountResult) -> ()){
+        
+        let contactStore = CNContactStore()
+        var contactsCount = 0
+        var allContainers  = [CNContainer]()
+        
+        do {
+            allContainers = try contactStore.containers(matching: nil)
+            for container in allContainers {
+                let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+                
+                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                contactsCount += containerResults.count
+            }
+            completionHandler(ContactsCountResult.success(response: contactsCount))
+        } catch {
+            completionHandler(ContactsCountResult.error(error: error))
+        }
+        
+    }
     
-    /// Transaction Add OR Delete OR Update
-    ///      - Author: Ahmad Almasri
-    /// - Parameters:
-    ///   - contacts:  Array of contacts.
-    ///   - transaction:  type of transaction (add , update , delete )
-    ///   - completionHandler: Returns Either Bool or Error.
+    //MARK:- Transaction
+    /**
+     Transaction Add OR Delete OR Update
+     - Author: Ahmad Almasri
+     - Parameters:
+     - contacts:  Array of contacts.
+     - transaction:  type of transaction (add , update , delete )
+     - completionHandler: Returns Either Bool or Error.
+     - result: enum type ContactOperationResult.
+     */
     private func transactionContacts(_ contacts: [CNContact] , transaction:TransactionContact, completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
         
         let store = CNContactStore()
@@ -388,6 +472,7 @@ private class ContactManager {
      
      - parameter contacts: Array of contacts [CN]CNContact.
      - parameter completionHandler: Returns Either Bool or Error.
+     - parameter result: enum type ContactOperationResult.
      */
     func addContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()) {
         
@@ -404,6 +489,7 @@ private class ContactManager {
      
      - parameter contacts: Array of contacts [CN]CNContact.
      - parameter completionHandler: Returns Either CNContact or Error.
+     - parameter result: enum type ContactOperationResult.
      */
     func updateContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()) {
         
@@ -420,6 +506,7 @@ private class ContactManager {
      
      - parameter contacts: Array of contacts [CN]CNContact.
      - parameter completionHandler: Returns Either CNContact or Error.
+     - parameter result: enum type ContactOperationResult.
      */
     func deleteContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()) {
         
@@ -438,6 +525,7 @@ private class ContactManager {
      
      - parameter contacts: Array of contacts.
      - parameter completionHandler: Returns Either Data or Error.
+     - parameter result: enum type ContactsToVCardResult.
      */
     func contactsToVCardConverter(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactsToVCardResult) -> ()) {
         
@@ -459,7 +547,7 @@ private class ContactManager {
      
      - parameter data: Data having contacts.
      - parameter completionHandler: Returns Either [CNContact] or Error.
-     
+     - parameter result: enum type ContactsFetchResult.
      */
     func vCardToContactConverter(_ data: Data, completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
@@ -481,6 +569,7 @@ private class ContactManager {
      - parameter data: Data having contacts.
      - parameter fileName: The name to which the file will be saved.
      - parameter completionHandler: Returns Either CNContact or Error.
+     - parameter result: enum type ContactOperationResult.
      */
     func saveContactInDocument(_ data: Data ,fileName:String = "contacts.contacts",
                                completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
@@ -740,6 +829,18 @@ struct ContactsManagerFacade {
         }
     }
     
+    static  func fetchContactsOnBackgroundThread(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.fetchContactsOnBackgroundThread(completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+        }
+    }
+    
     static func getContactsByIdentifiers(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
         
         PermissionHandler.requestAccess { (granted) in
@@ -818,8 +919,18 @@ struct ContactsManagerFacade {
         return ContactManager.shared.parseAndroidVCard(vCard)
         
     }
+    static  func getContactsCount(completionHandler: @escaping (_ result: ContactsCountResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+                ContactManager.shared.getContactsCount(completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+        }
+    }
     
-   
 }
 
 
@@ -852,7 +963,7 @@ extension UIViewController {
             break
         default:
             print("Unknown error code \(error.code) ")
-
+            
             break
         }
     }
