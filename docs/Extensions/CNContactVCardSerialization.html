@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>InfoType Enumeration Reference</title>
+    <title>CNContactVCardSerialization Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/InfoType" class="dashAnchor"></a>
-    <a title="InfoType Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Extension/CNContactVCardSerialization" class="dashAnchor"></a>
+    <a title="CNContactVCardSerialization Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (32% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        InfoType Enumeration Reference
+        CNContactVCardSerialization Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -109,23 +109,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>InfoType</h1>
+            <h1>CNContactVCardSerialization</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">enum</span> <span class="kt">InfoType</span><span class="p">:</span><span class="kt">String</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">CNContactVCardSerialization</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                 </div>
               </div>
-            <p>InfoType matching regx pattern type</p>
-<div class="aside aside-author">
-    <p class="aside-title">Author</p>
-    <p>Ahmad Almasri</p>
-
-</div>
-<li><p>tel:  is tel using tel pattern</p></li>
-<li><p>email: is email using email pattern</p></li>
-<li><p>image: is image using image pattern</p></li>
-
+            
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -133,9 +124,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF"></a>
-                    <a name="//apple_ref/swift/Element/tel" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF">tel</a>
+                    <a name="/s:So27CNContactVCardSerializationC14ContactManagerE23vcardDataAppendingPhoto33_4FF249FD371F831F81FD4436469E74DDLL10Foundation0G0VSgAH0F0_SS19photoAsBase64StringtFZ"></a>
+                    <a name="//apple_ref/swift/Method/vcardDataAppendingPhoto(vcard:photoAsBase64String:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So27CNContactVCardSerializationC14ContactManagerE23vcardDataAppendingPhoto33_4FF249FD371F831F81FD4436469E74DDLL10Foundation0G0VSgAH0F0_SS19photoAsBase64StringtFZ">vcardDataAppendingPhoto(vcard:photoAsBase64String:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -143,16 +134,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Append Base64 image to VCard data</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">tel</span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF">email</a></span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF">image</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">private</span> <span class="kd">class</span> <span class="kd">func</span> <span class="nf">vcardDataAppendingPhoto</span><span class="p">(</span><span class="nv">vcard</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="n">photoAsBase64String</span> <span class="nv">photo</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The data representing contacts include photo</p>
                       </div>
                     </section>
                   </div>
@@ -160,9 +155,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF"></a>
-                    <a name="//apple_ref/swift/Element/email" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF">email</a>
+                    <a name="/s:So27CNContactVCardSerializationC14ContactManagerE4data10Foundation4DataVSaySo0A0CGKFZ"></a>
+                    <a name="//apple_ref/swift/Method/data(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So27CNContactVCardSerializationC14ContactManagerE4data10Foundation4DataVSaySo0A0CGKFZ">data(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -170,43 +165,44 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Convert contacts to data include images</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    Error information.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF">tel</a></span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF">image</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">data</span><span class="p">(</span> <span class="n">_</span> <span class="nv">contacts</span><span class="p">:</span> <span class="p">[</span><span class="kt">CNContact</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span></code></pre>
 
                         </div>
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF"></a>
-                    <a name="//apple_ref/swift/Element/image" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5imageA2DmF">image</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contacts</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of contacts.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO3telA2DmF">tel</a></span><span class="p">,</span> <span class="n"><a href="../Enums/InfoType.html#/s:14ContactManager8InfoType33_4FF249FD371F831F81FD4436469E74DDLLO5emailA2DmF">email</a></span><span class="p">,</span> <span class="n">image</span></code></pre>
-
-                        </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The data representing contacts.</p>
                       </div>
                     </section>
                   </div>

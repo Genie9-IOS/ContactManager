@@ -380,140 +380,140 @@
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 413,
+      "line": 417,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).executeRequest()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 422,
+      "line": 426,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).addContact()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 433,
+      "line": 437,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).deleteContact()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 444,
+      "line": 448,
       "symbol": "ContactManager.transactionContacts(_:transaction:completionHandler:).updateContact()",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 530,
+      "line": 534,
       "symbol": "ContactManager.contactsToVCardConverter(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 591,
+      "line": 595,
       "symbol": "ContactManager.getQueueLabel(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 818,
+      "line": 868,
       "symbol": "ContactsManagerFacade",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 820,
+      "line": 870,
       "symbol": "ContactsManagerFacade.fetchContacts(completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 832,
+      "line": 882,
       "symbol": "ContactsManagerFacade.fetchContactsOnBackgroundThread(completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 844,
+      "line": 894,
       "symbol": "ContactsManagerFacade.getContactsByIdentifiers(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 856,
+      "line": 906,
       "symbol": "ContactsManagerFacade.getcContactByFullName(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 868,
+      "line": 918,
       "symbol": "ContactsManagerFacade.addContact(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 881,
+      "line": 931,
       "symbol": "ContactsManagerFacade.updateContact(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 894,
+      "line": 944,
       "symbol": "ContactsManagerFacade.deleteContact(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 906,
+      "line": 956,
       "symbol": "ContactsManagerFacade.contactsToVCardConverter(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 912,
+      "line": 962,
       "symbol": "ContactsManagerFacade.vCardToContactConverter(_:completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 917,
+      "line": 967,
       "symbol": "ContactsManagerFacade.parseAndroidVCard(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 922,
+      "line": 972,
       "symbol": "ContactsManagerFacade.getContactsCount(completionHandler:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 937,
+      "line": 987,
       "symbol": "PermissionHandler",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/Users/ahmadalmasri/Desktop/ContactManager/Contact/ContactManager/ContactManager.swift",
-      "line": 957,
+      "line": 1007,
       "symbol": "UIViewController.showDialog(forError:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
