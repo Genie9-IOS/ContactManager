@@ -281,7 +281,11 @@ private class ContactManager {
                 for container in allContainers {
                     let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
                     
-                    let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                    
+                    let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()
+                        ,CNContactImageDataAvailableKey as CNKeyDescriptor
+                        ,CNContactThumbnailImageDataKey as CNKeyDescriptor
+                        ,CNContactImageDataKey as CNKeyDescriptor])
                     contacts.append(contentsOf: containerResults)
                 }
                 completionHandler(ContactsFetchResult.success(response: contacts))
@@ -531,7 +535,7 @@ private class ContactManager {
         
         var vcardFromContacts = Data()
         do {
-            try vcardFromContacts = CNContactVCardSerialization.data(with: contacts)
+            try vcardFromContacts = CNContactVCardSerialization.data(contacts)
             completionHandler(ContactsToVCardResult.success(response: vcardFromContacts))
         } catch {
             completionHandler(ContactsToVCardResult.error(error: error))
@@ -597,6 +601,52 @@ private class ContactManager {
 }
 
 
+//MARK:- Serialization Image
+
+extension CNContactVCardSerialization {
+    
+         /**
+        Append Base64 image to VCard data
+    
+       - Parameters:
+         - vcard: CNContact as Data
+         - photo: Contact photo string base64
+       - Returns: The data representing contacts include photo
+        */
+      private class func vcardDataAppendingPhoto(vcard: Data, photoAsBase64String photo: String) -> Data? {
+        let vcardAsString = String(data: vcard, encoding: .utf8)
+        let vcardPhoto = "PHOTO;TYPE=JPEG;ENCODING=BASE64:".appending(photo)
+        let vcardPhotoThenEnd = vcardPhoto.appending("\nEND:VCARD")
+        if let vcardPhotoAppended = vcardAsString?.replacingOccurrences(of: "END:VCARD", with: vcardPhotoThenEnd) {
+            return vcardPhotoAppended.data(using: .utf8)
+        }
+        return nil
+        
+    }
+    /**
+     Convert contacts to data include images
+    
+     - Parameter contacts:  An array of contacts.
+     - Returns: The data representing contacts.
+     - Throws:  Error information.
+     */
+    class func data( _ contacts: [CNContact]) throws -> Data {
+        var contactData = Data()
+        let contactsWithoutImages = contacts.filter({!$0.imageDataAvailable})
+        let data = try CNContactVCardSerialization.data(with: contactsWithoutImages)
+        contactData.append(data)
+        for contact in  contacts.filter({$0.imageDataAvailable}) {
+              let data = try CNContactVCardSerialization.data(with: [contact])
+                if let base64imageString = contact.thumbnailImageData?.base64EncodedString(),
+                    let updatedData = vcardDataAppendingPhoto(vcard: data, photoAsBase64String: base64imageString) {
+                    contactData.append(updatedData)
+                }
+
+        }
+        return contactData
+    }
+    
+}
 
 
 extension ContactManager {
