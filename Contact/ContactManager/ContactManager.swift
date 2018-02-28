@@ -20,6 +20,7 @@ import UIKit
 enum ContactsFetchResult {
     case success(response: [CNContact])
     case error(error: Error)
+     case cancelled()
 }
 
 /**
@@ -33,6 +34,7 @@ enum ContactsFetchResult {
 enum ContactFetchResult {
     case success(response: CNContact?)
     case error(error: Error)
+    
 }
 
 /**
@@ -58,6 +60,7 @@ enum ContactOperationResult {
 enum ContactsToVCardResult {
     case success(response: Data)
     case error(error: Error)
+    case cancelled()
 }
 
 /**
@@ -246,17 +249,21 @@ private enum ErrorCode:Int {
  
  - Warning: By default, the accessing of the init of this class is denied, However, make sure to access this function by it *shared* property.
  */
-private class ContactManager {
+ class ContactManager {
     // TODO: name the dispatch queues labels.
     
+    //MARK:- Declarations
+   private var paused:Bool = false
+   private var isCancelled = false
+    private var pauseCondition:NSCondition!
     
     //MARK:- shared
-    
     /// the singleton instance for accessing the manager.
-    static let shared = ContactManager()
+    // (Ahmad Almasri) remove shared instance because this manager call from multiple operation
+   // static let shared = ContactManager()
     
     //MARK:- Inits
-    private init() {}
+  //  private init() {}
     
     //MARK:- Fetching
     /**
@@ -270,6 +277,7 @@ private class ContactManager {
      
      for  get all the containers and iterate over them to extract all contacts from each of them
      */
+    //TODO : Missing "This func needed locking thread because multiple call  "
     func fetchContactsOnBackgroundThread(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         let concurrentQueue = DispatchQueue(label: getQueueLabel(#function))
         concurrentQueue.async {
@@ -278,14 +286,33 @@ private class ContactManager {
             var allContainers  = [CNContainer]()
             do {
                 allContainers = try contactStore.containers(matching: nil)
+                
+                self.waitifPaused()
+                if self.isCancelled{
+                    completionHandler(ContactsFetchResult.cancelled())
+                    return
+                }
+                
                 for container in allContainers {
+                    
+                    self.waitifPaused()
+                    if self.isCancelled{
+                        completionHandler(ContactsFetchResult.cancelled())
+                        return
+                    }
+                    
                     let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
-                    
-                    
                     let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()
                         ,CNContactImageDataAvailableKey as CNKeyDescriptor
                         ,CNContactThumbnailImageDataKey as CNKeyDescriptor
                         ,CNContactImageDataKey as CNKeyDescriptor])
+                    
+                    self.waitifPaused()
+                    if self.isCancelled{
+                        completionHandler(ContactsFetchResult.cancelled())
+                        return
+                    }
+
                     contacts.append(contentsOf: containerResults)
                 }
                 completionHandler(ContactsFetchResult.success(response: contacts))
@@ -315,11 +342,34 @@ private class ContactManager {
         
         do {
             allContainers = try contactStore.containers(matching: nil)
+            
+            self.waitifPaused()
+            if isCancelled{
+                
+                completionHandler(ContactsFetchResult.cancelled())
+                return
+            }
+            
             for container in allContainers {
+                
+                self.waitifPaused()
+                if isCancelled{
+                    completionHandler(ContactsFetchResult.cancelled())
+                    return
+                }
+                
                 let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
                 
                 let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: [CNContactVCardSerialization.descriptorForRequiredKeys()])
+                
+                self.waitifPaused()
+                if isCancelled{
+                    completionHandler(ContactsFetchResult.cancelled())
+                    return
+                }
+
                 contacts.append(contentsOf: containerResults)
+                
             }
             completionHandler(ContactsFetchResult.success(response: contacts))
         } catch {
@@ -535,7 +585,18 @@ private class ContactManager {
         
         var vcardFromContacts = Data()
         do {
-            try vcardFromContacts = CNContactVCardSerialization.data(contacts)
+            self.waitifPaused()
+            if self.isCancelled{
+                completionHandler(ContactsToVCardResult.cancelled())
+                return
+            }
+            try vcardFromContacts = data(contacts)
+            
+            self.waitifPaused()
+            if self.isCancelled{
+                completionHandler(ContactsToVCardResult.cancelled())
+                return
+            }
             completionHandler(ContactsToVCardResult.success(response: vcardFromContacts))
         } catch {
             completionHandler(ContactsToVCardResult.error(error: error))
@@ -557,13 +618,66 @@ private class ContactManager {
         
         var contacts = [CNContact]()
         do {
+            self.waitifPaused()
+            if self.isCancelled{
+                completionHandler(ContactsFetchResult.cancelled())
+                return
+            }
             try contacts = CNContactVCardSerialization.contacts(with: data) as [CNContact]
+            
+            self.waitifPaused()
+            if self.isCancelled{
+                completionHandler(ContactsFetchResult.cancelled())
+                return
+            }
             completionHandler(ContactsFetchResult.success(response: contacts))
         } catch {
             completionHandler(ContactsFetchResult.error(error: error))
         }
     }
     
+    /**
+     Convert contacts to data include images
+     
+     - Parameter contacts:  An array of contacts.
+     - Returns: The data representing contacts.
+     - Throws:  Error information.
+     */
+     func data( _ contacts: [CNContact]) throws -> Data {
+        var contactData = Data()
+        let contactsWithoutImages = contacts.filter({!$0.imageDataAvailable})
+        self.waitifPaused()
+        if self.isCancelled{
+            
+            return contactData
+        }
+        let data = try CNContactVCardSerialization.data(with: contactsWithoutImages)
+        self.waitifPaused()
+        if self.isCancelled{
+            
+            return contactData
+        }
+        contactData.append(data)
+        for contact in  contacts.filter({$0.imageDataAvailable}) {
+            self.waitifPaused()
+            if self.isCancelled{
+                
+                return contactData
+            }
+            let data = try CNContactVCardSerialization.data(with: [contact])
+            self.waitifPaused()
+            if self.isCancelled{
+                
+                return contactData
+            }
+            if let base64imageString = contact.thumbnailImageData?.base64EncodedString(),
+                let updatedData = CNContactVCardSerialization.vcardDataAppendingPhoto(vcard: data, photoAsBase64String: base64imageString) {
+                contactData.append(updatedData)
+            }
+            
+        }
+        return contactData
+    }
     
     // MARK:- Helper Methods:
     /**
@@ -592,6 +706,44 @@ private class ContactManager {
         }
     }
     
+    // MARK:- Main Transactions
+    private  func waitifPaused(){
+        if pauseCondition == nil {
+            
+            pauseCondition = NSCondition()
+        }
+        self.pauseCondition.lock()
+        
+        if paused {
+            self.pauseCondition.wait()
+        }
+        self.pauseCondition.unlock()
+    }
+    
+    func pause() {
+        
+        lockCondition(true)
+    }
+    func resume(){
+        lockCondition(false)
+    }
+    
+    private func lockCondition(_ pause:Bool){
+        if pauseCondition == nil {
+            
+            pauseCondition = NSCondition()
+        }
+        self.pauseCondition.lock()
+        self.paused = pause
+        self.pauseCondition.signal()
+        self.pauseCondition.unlock()
+    }
+    
+    func setIsCancelled(_ isCancelled:Bool){
+        
+        self.isCancelled = isCancelled
+    }
+    
     private func getQueueLabel(_ functionName: String) -> String {
         let filePath = URL(fileURLWithPath: #file)
         let lastComponenet = filePath.lastPathComponent
@@ -613,7 +765,7 @@ extension CNContactVCardSerialization {
          - photo: Contact photo string base64
        - Returns: The data representing contacts include photo
         */
-      private class func vcardDataAppendingPhoto(vcard: Data, photoAsBase64String photo: String) -> Data? {
+       class func vcardDataAppendingPhoto(vcard: Data, photoAsBase64String photo: String) -> Data? {
         let vcardAsString = String(data: vcard, encoding: .utf8)
         let vcardPhoto = "PHOTO;TYPE=JPEG;ENCODING=BASE64:".appending(photo)
         let vcardPhotoThenEnd = vcardPhoto.appending("\nEND:VCARD")
@@ -623,28 +775,7 @@ extension CNContactVCardSerialization {
         return nil
         
     }
-    /**
-     Convert contacts to data include images
-    
-     - Parameter contacts:  An array of contacts.
-     - Returns: The data representing contacts.
-     - Throws:  Error information.
-     */
-    class func data( _ contacts: [CNContact]) throws -> Data {
-        var contactData = Data()
-        let contactsWithoutImages = contacts.filter({!$0.imageDataAvailable})
-        let data = try CNContactVCardSerialization.data(with: contactsWithoutImages)
-        contactData.append(data)
-        for contact in  contacts.filter({$0.imageDataAvailable}) {
-              let data = try CNContactVCardSerialization.data(with: [contact])
-                if let base64imageString = contact.thumbnailImageData?.base64EncodedString(),
-                    let updatedData = vcardDataAppendingPhoto(vcard: data, photoAsBase64String: base64imageString) {
-                    contactData.append(updatedData)
-                }
-
-        }
-        return contactData
-    }
+  
     
 }
 
@@ -865,13 +996,16 @@ extension ContactManager {
 }
 
 
-struct ContactsManagerFacade {
+class ContactsManagerFacade {
     
-    static func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
+    private let contactManager = ContactManager()
+   
+     func fetchContacts(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()) {
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.fetchContacts(completionHandler: completionHandler)
+                
+              self.contactManager.fetchContacts(completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -879,11 +1013,11 @@ struct ContactsManagerFacade {
         }
     }
     
-    static  func fetchContactsOnBackgroundThread(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
+      func fetchContactsOnBackgroundThread(completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.fetchContactsOnBackgroundThread(completionHandler: completionHandler)
+                self.contactManager.fetchContactsOnBackgroundThread(completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -891,11 +1025,11 @@ struct ContactsManagerFacade {
         }
     }
     
-    static func getContactsByIdentifiers(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
+     func getContactsByIdentifiers(_ identifiers: [String], completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.getContactsByIdentifiers(identifiers, completionHandler: completionHandler)
+                self.contactManager.getContactsByIdentifiers(identifiers, completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -903,11 +1037,11 @@ struct ContactsManagerFacade {
         }
     }
     
-    static func getcContactByFullName(_ contact: CNContact, completionHandler: @escaping (_ result: ContactFetchResult) -> ()) {
+     func getcContactByFullName(_ contact: CNContact, completionHandler: @escaping (_ result: ContactFetchResult) -> ()) {
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.getcContactByFullName(contact, completionHandler: completionHandler)
+                self.contactManager.getcContactByFullName(contact, completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -915,24 +1049,11 @@ struct ContactsManagerFacade {
         }
     }
     
-    static func  addContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
+     func  addContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.addContact(contacts, completionHandler: completionHandler)
-            }else{
-                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
-                completionHandler(.error(error: error))
-            }
-            
-        }
-    }
-    
-    static func updateContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
-        
-        PermissionHandler.requestAccess { (granted) in
-            if granted {
-                ContactManager.shared.updateContact(contacts, completionHandler: completionHandler)
+                self.contactManager.addContact(contacts, completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -941,11 +1062,24 @@ struct ContactsManagerFacade {
         }
     }
     
-    static func deleteContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
+     func updateContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.deleteContact(contacts, completionHandler: completionHandler)
+                self.contactManager.updateContact(contacts, completionHandler: completionHandler)
+            }else{
+                let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
+                completionHandler(.error(error: error))
+            }
+            
+        }
+    }
+    
+     func deleteContact(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactOperationResult) -> ()){
+        
+        PermissionHandler.requestAccess { (granted) in
+            if granted {
+               self.contactManager.deleteContact(contacts, completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -953,27 +1087,28 @@ struct ContactsManagerFacade {
         }
     }
     
-    static func contactsToVCardConverter(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactsToVCardResult) -> ()){
+     func contactsToVCardConverter(_ contacts: [CNContact], completionHandler: @escaping (_ result: ContactsToVCardResult) -> ()){
         
-        ContactManager.shared.contactsToVCardConverter(contacts, completionHandler: completionHandler)
+       self.contactManager.contactsToVCardConverter(contacts, completionHandler: completionHandler)
         
     }
     
-    static func vCardToContactConverter(_ data: Data, completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
+     func vCardToContactConverter(_ data: Data, completionHandler: @escaping (_ result: ContactsFetchResult) -> ()){
         
-        ContactManager.shared.vCardToContactConverter(data, completionHandler: completionHandler)
+       self.contactManager.vCardToContactConverter(data, completionHandler: completionHandler)
     }
     
-    static func  parseAndroidVCard(_ vCard:String)->String{
+     func  parseAndroidVCard(_ vCard:String)->String{
         
-        return ContactManager.shared.parseAndroidVCard(vCard)
+        return self.contactManager.parseAndroidVCard(vCard)
         
     }
-    static  func getContactsCount(completionHandler: @escaping (_ result: ContactsCountResult) -> ()){
+    
+      func getContactsCount(completionHandler: @escaping (_ result: ContactsCountResult) -> ()){
         
         PermissionHandler.requestAccess { (granted) in
             if granted {
-                ContactManager.shared.getContactsCount(completionHandler: completionHandler)
+                self.contactManager.getContactsCount(completionHandler: completionHandler)
             }else{
                 let error = NSError(domain: "Access Denied", code: ErrorCode.accessDenied.rawValue)
                 completionHandler(.error(error: error))
@@ -981,6 +1116,18 @@ struct ContactsManagerFacade {
         }
     }
     
+     func pause() {
+        
+         self.contactManager.pause()
+    }
+     func resume() {
+        
+        self.contactManager.resume()
+    }
+     func setIsCancelled(_ isCancelled:Bool){
+        
+        self.contactManager.setIsCancelled(isCancelled)
+    }
 }
 
 
